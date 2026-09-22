@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090d0b"/>
+      <stop offset="60%" stop-color="#111714"/>
+      <stop offset="100%" stop-color="#0b110e"/>
+    </linearGradient>
+    <linearGradient id="primaryGreen" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2d6a4f"/>
+      <stop offset="100%" stop-color="#52b788"/>
+    </linearGradient>
+    <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#1b2a21" stroke-width="0.75" opacity="0.4"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="450" fill="url(#bgGrad)"/>
+  <rect width="600" height="450" fill="url(#grid)"/>
+
+  <!-- Tech crosshairs & frame -->
+  <rect x="20" y="20" width="560" height="410" rx="16" fill="none" stroke="#243b2f" stroke-width="1.5"/>
+  <circle cx="30" cy="30" r="3" fill="#52b788"/>
+  <circle cx="570" cy="30" r="3" fill="#52b788"/>
+  <circle cx="30" cy="420" r="3" fill="#52b788"/>
+  <circle cx="570" cy="420" r="3" fill="#52b788"/>
+
+  <!-- Central Visual Silhouette -->
+  
+        <ellipse cx="300" cy="210" rx="75" ry="90" fill="#151b17" stroke="#2d6a4f" stroke-width="2.5"/>
+        <path d="M355 160 Q280 140 240 200 Q270 220 300 185 Z" fill="#2d6a4f" opacity="0.9"/>
+        <path d="M235 210 Q260 215 255 235 Q235 240 230 225 Z" fill="#1b4332" stroke="#52b788" stroke-width="1.5"/>
+        <!-- Fade gradient lines -->
+        <line x1="290" y1="210" x2="340" y2="210" stroke="#52b788" stroke-width="2" stroke-dasharray="4 2"/>
+        <line x1="285" y1="230" x2="335" y2="230" stroke="#52b788" stroke-width="1.5" stroke-dasharray="6 3"/>
+        <line x1="290" y1="250" x2="330" y2="250" stroke="#52b788" stroke-width="1" stroke-dasharray="8 4"/>
+      
+
+  <!-- Header Badge: Style Name & Category -->
+  <rect x="40" y="40" width="140" height="24" rx="6" fill="#1b4332" opacity="0.8"/>
+  <text x="110" y="56" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="#52b788" text-anchor="middle" letter-spacing="1.5">TAGLIO & FADE</text>
+  <text x="40" y="86" font-family="'Syne', sans-serif" font-size="20" font-weight="800" fill="#f8fafc">Classic Pompadour Modern</text>
+
+  <!-- Angle Badge Center Top -->
+  <rect x="410" y="40" width="150" height="30" rx="8" fill="#15241b" stroke="#52b788" stroke-width="1"/>
+  <text x="485" y="60" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="800" fill="#f8fafc" text-anchor="middle" letter-spacing="1.2">
+    ⬅️ PROFILO SINISTRO
+  </text>
+
+  <!-- Bottom Details Bar -->
+  <rect x="40" y="375" width="520" height="40" rx="10" fill="#0d1410" stroke="#1f3427" stroke-width="1"/>
+  <text x="60" y="400" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="500" fill="#94a3b8">
+    <tspan fill="#52b788" font-weight="700">ANGOLAZIONE 3/5:</tspan> Sfumatura laterale sinistra e raccordo
+  </text>
+  <text x="540" y="400" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="600" fill="#52b788" text-anchor="end">
+    BARBER FEB • 360°
+  </text>
+</svg>
