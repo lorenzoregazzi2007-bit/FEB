@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   
   <title>BARBER FEB | Minerbio (BO) - Mattia Fabbri</title>
-  <meta name="description" content="Barber FEB a Minerbio (Bologna). Taglio moderno, sfumature Skin Fade a pelle, cura della barba con panno caldo e lametta. Prenotazioni su Take Care.">
+  <meta name="description" content="Barber FEB a Minerbio (Bologna) di Mattia Fabbri. Sfumature Skin Fade a pelle, cura della barba con panno caldo e lametta. Prenotazioni su Take Care.">
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
   
   <!-- Font Minimal Editorial: Plus Jakarta Sans -->
@@ -18,7 +18,37 @@
 <body>
 
   <!-- ============================================================
-       HEADER (Fedele al layout Mobile)
+       INTRO DEL SITO (Animazione Forbice & Taglio)
+  ============================================================ -->
+  <div class="intro-screen" id="intro-screen">
+    <div class="intro-curtain intro-curtain-left"></div>
+    <div class="intro-curtain intro-curtain-right"></div>
+    <div class="intro-content">
+      <div class="scissor-animation-box">
+        <svg class="scissor-svg" viewBox="0 0 100 100" width="100" height="100" fill="none">
+          <!-- Lama Superiore -->
+          <g class="blade blade-upper">
+            <path d="M 22 72 C 16 72 12 66 12 58 C 12 50 18 45 25 48 L 52 54 L 88 32 C 91 30 93 34 91 37 L 54 62 L 34 68 C 30 70 26 72 22 72 Z" fill="#ffffff"/>
+            <circle cx="20" cy="58" r="6" fill="#000000" stroke="#ffffff" stroke-width="2.5"/>
+          </g>
+          <!-- Lama Inferiore -->
+          <g class="blade blade-lower">
+            <path d="M 22 28 C 16 28 12 34 12 42 C 12 50 18 55 25 52 L 52 46 L 88 68 C 91 70 93 66 91 63 L 54 38 L 34 32 C 30 30 26 28 22 28 Z" fill="#ffffff"/>
+            <circle cx="20" cy="42" r="6" fill="#000000" stroke="#ffffff" stroke-width="2.5"/>
+          </g>
+          <!-- Vite Perno -->
+          <circle cx="53" cy="50" r="3.5" fill="#ffffff" stroke="#000000" stroke-width="1.5"/>
+        </svg>
+        <div class="cut-laser-line"></div>
+      </div>
+      <div class="intro-brand-name">BARBER FEB</div>
+      <div class="intro-brand-sub">MINERBIO • BOLOGNA</div>
+      <button class="intro-skip-btn" id="intro-skip-btn">ENTRA ➔</button>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       HEADER
   ============================================================ -->
   <header class="site-header">
     <div class="container header-container">
@@ -30,6 +60,7 @@
 
         <ul class="nav-menu" id="nav-links">
           <li><a href="#chi-siamo">Chi Siamo</a></li>
+          <li><a href="#il-barbiere">Il Barbiere</a></li>
           <li><a href="#cartelle-tagli">I Tagli</a></li>
           <li><a href="#prezzi">Listino</a></li>
           <li><a href="#recensioni">Recensioni</a></li>
@@ -54,14 +85,33 @@
 
   <main>
     <!-- ============================================================
-         SEZIONE HERO & CHI SIAMO (Fedele allo Screenshot del Cliente)
+         SEZIONE HERO & CHI SIAMO CON CAROSELLO SLIDESHOW AUTOMATICO
     ============================================================ -->
     <section class="section-chi-siamo" id="chi-siamo">
       <div class="container">
-        <!-- Foto del Salone / Taglio in Bianco e Nero -->
-        <div class="salon-hero-frame">
-          <img src="assets/salon-hero.jpg" alt="Barber FEB Salone e Taglio Minerbio" class="salon-hero-img" loading="eager">
+        <!-- Hero Frame con Slideshow Automatico di varie immagini in dissolvenza -->
+        <div class="salon-hero-frame" id="hero-slideshow">
+          <!-- Slide 1: Salone e Poltrona -->
+          <div class="hero-slide active" data-index="0">
+            <img src="assets/salon-hero.jpg" alt="Barber FEB Salone Minerbio" class="salon-hero-img" loading="eager">
+          </div>
+          <!-- Slide 2: Lavoro artigianale con forbici -->
+          <div class="hero-slide" data-index="1">
+            <img src="assets/hero-slide-2.jpg" alt="Taglio a Forbici e Pettine" class="salon-hero-img" loading="lazy">
+          </div>
+          <!-- Slide 3: Sfumatura Skin Fade e rifinitura -->
+          <div class="hero-slide" data-index="2">
+            <img src="assets/hero-slide-3.jpg" alt="Sfumatura Skin Fade Barber FEB" class="salon-hero-img" loading="lazy">
+          </div>
+
           <div class="salon-badge">MINERBIO • VIA CANALETTO 1</div>
+          
+          <!-- Indicatori di scorrimento automatico -->
+          <div class="hero-slideshow-dots" id="hero-dots">
+            <span class="hero-dot active" data-slide="0"></span>
+            <span class="hero-dot" data-slide="1"></span>
+            <span class="hero-dot" data-slide="2"></span>
+          </div>
         </div>
 
         <!-- Blocco Testuale Chi Siamo -->
@@ -87,6 +137,58 @@
             <a href="https://takecare.app" target="_blank" rel="noopener noreferrer" class="btn btn-white btn-block">
               PRENOTA UN APPUNTAMENTO
             </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SEZIONE DEDICATA AL PARRUCCHIERE (UNICO BARBIERE: MATTIA FABBRI)
+         Con Apertura Scheda Laterale a Destra (Stile DominvsBjj)
+    ============================================================ -->
+    <section class="section section-barber" id="il-barbiere">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">— L'ARTIGIANO —</span>
+          <h2 class="section-title">Mattia Fabbri</h2>
+          <p class="section-desc">
+            Un solo barbiere, nessuna catena di montaggio. Quando ti siedi in poltrona, l'attenzione e il tempo sono dedicati al 100% al tuo stile.
+          </p>
+        </div>
+
+        <div class="barber-box-card panel-trigger" id="barber-card-trigger" data-panel-id="mattia">
+          <div class="barber-img-col">
+            <img src="assets/barber-mattia.jpg" alt="Mattia Fabbri Barbiere Barber FEB" class="barber-portrait">
+            <div class="barber-tap-badge">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              <span>CLICCA PER APRIRE SCHEDA</span>
+            </div>
+          </div>
+          
+          <div class="barber-info-col">
+            <span class="barber-tag">FONDATORE &amp; MASTER BARBER</span>
+            <h3 class="barber-name">Mattia Fabbri</h3>
+            <p class="barber-intro">
+              “Credo nel valore del tempo e nella precisione millimetrica della lametta. Ho voluto creare un salone intimo e dedicato ad un solo cliente alla volta: qui trovi ascolto, tecnica artigianale e rispetto per le tue linee naturali.”
+            </p>
+            <div class="barber-highlights">
+              <div class="highlight-item">
+                <span class="highlight-num">1:1</span>
+                <span class="highlight-text">Servizio esclusivo singolo cliente</span>
+              </div>
+              <div class="highlight-item">
+                <span class="highlight-num">100%</span>
+                <span class="highlight-text">Rifinitura artigianale a lametta</span>
+              </div>
+              <div class="highlight-item">
+                <span class="highlight-num">10+</span>
+                <span class="highlight-text">Anni di esperienza &amp; studio sfumature</span>
+              </div>
+            </div>
+            
+            <button class="btn btn-ghost btn-open-profile" aria-label="Apri dettagli su Mattia Fabbri">
+              SCOPRI LA STORIA &amp; FILOSOFIA ➔
+            </button>
           </div>
         </div>
       </div>
@@ -353,49 +455,39 @@
     </section>
 
     <!-- ============================================================
-         SEZIONE RECENSIONI GOOGLE (Fedele al Mockup fornito)
+         SEZIONE RECENSIONI GOOGLE CON SCORRIMENTO A DISSOLVENZA AUTOMATICA
     ============================================================ -->
     <section class="section section-reviews" id="recensioni">
       <div class="container">
         
-        <!-- Recensione Card in evidenza (come nello screenshot inviato) -->
-        <div class="google-review-card-featured">
+        <!-- Recensione Card Principale con Dissolvenza Automatica -->
+        <div class="google-review-card-featured" id="google-reviews-fader">
           <div class="google-review-badge">
             <span class="badge-line"></span>
             <span class="badge-text">LE RECENSIONI SU GOOGLE</span>
             <span class="badge-line"></span>
           </div>
 
-          <blockquote class="google-review-quote">
-            “Son venuto fin da Milano per tagliarmi i capelli qui e mi ha fatto il miglior taglio che potessi desiderare.”
-          </blockquote>
+          <div class="review-fade-wrapper">
+            <blockquote class="google-review-quote" id="fade-review-quote">
+              “Son venuto fin da Milano per tagliarmi i capelli qui e mi ha fatto il miglior taglio che potessi desiderare.”
+            </blockquote>
 
-          <div class="google-review-author-row">
-            <div class="google-review-stars" aria-label="5 stelle su 5">
-              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            <div class="google-review-author-row">
+              <div class="google-review-stars" aria-label="5 stelle su 5">
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+              </div>
+              <div class="google-review-author" id="fade-review-author">LUCA F. • GOOGLE</div>
             </div>
-            <div class="google-review-author">LUCA F. • GOOGLE</div>
-          </div>
-        </div>
-
-        <!-- Altre recensioni Google in scorrimento orizzontale touch -->
-        <div class="reviews-slider-track">
-          <div class="review-mini-card">
-            <div class="mini-stars">★★★★★</div>
-            <p class="mini-text">“Precisione incredibile sulla sfumatura Skin Fade. Ambiente curato nei minimi dettagli e grande professionalità.”</p>
-            <div class="mini-author">MATTEO R. • GOOGLE</div>
           </div>
 
-          <div class="review-mini-card">
-            <div class="mini-stars">★★★★★</div>
-            <p class="mini-text">“Modellatura barba con panno caldo rilassante e perfetta. Mattia ha una manualità con la lametta unica.”</p>
-            <div class="mini-author">ANDREA S. • GOOGLE</div>
-          </div>
-
-          <div class="review-mini-card">
-            <div class="mini-stars">★★★★★</div>
-            <p class="mini-text">“Il miglior barbiere di Minerbio e provincia di Bologna. Puntualità impeccabile e risultato sempre al top.”</p>
-            <div class="mini-author">GABRIELE B. • GOOGLE</div>
+          <!-- Indicatori di scorrimento recensioni -->
+          <div class="reviews-fade-dots" id="reviews-fade-dots">
+            <span class="review-dot active" data-index="0"></span>
+            <span class="review-dot" data-index="1"></span>
+            <span class="review-dot" data-index="2"></span>
+            <span class="review-dot" data-index="3"></span>
+            <span class="review-dot" data-index="4"></span>
           </div>
         </div>
 
@@ -404,7 +496,7 @@
           <div class="google-rating-score">
             <span class="score-num">5.0</span>
             <span class="score-stars">★★★★★</span>
-            <span class="score-count">Media recensioni Google</span>
+            <span class="score-count">Media recensioni certificate Google</span>
           </div>
           <a href="https://maps.google.com/?q=Via+Canaletto+1+Minerbio+BO" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
             Scrivi una Recensione su Google
@@ -488,6 +580,55 @@
   </main>
 
   <!-- ============================================================
+       PREMIUM SIDE PANEL A DESTRA (Stile DominvsBjj per Mattia Fabbri)
+  ============================================================ -->
+  <div class="side-panel-overlay" id="side-panel-overlay"></div>
+  <aside class="side-panel" id="side-panel" aria-label="Scheda Dettagli Mattia Fabbri">
+    <button class="side-panel-close" id="side-panel-close" aria-label="Chiudi Scheda">✕</button>
+    <div class="side-panel-content">
+      <div class="side-panel-header">
+        <div class="side-panel-image" id="side-panel-image"></div>
+      </div>
+      <div class="side-panel-body">
+        <span class="side-panel-subtitle" id="side-panel-subtitle">TITOLARE &amp; MASTER BARBER</span>
+        <h3 class="side-panel-title" id="side-panel-title">Mattia Fabbri</h3>
+        
+        <div class="side-panel-desc" id="side-panel-desc">
+          <p>
+            Benvenuto da Barber FEB. Sono <strong>Mattia Fabbri</strong>, fondatore e unico barbiere del salone a Minerbio.
+          </p>
+          <p>
+            Ho scelto di non avere collaboratori multipli per un motivo fondamentale: <strong>garantirti un'esperienza sartoriale pura</strong>. Quando varchi la soglia del salone, non sei un numero su un tabellone, ma una persona con uno stile unico che merita tempo, precisione e massima concentrazione.
+          </p>
+          <div class="side-panel-feature-list">
+            <div class="side-feature">
+              <strong>✦ Sfumature Skin Fade a Zero</strong>
+              <span>Transizioni pulite senza scalini, eseguite con clipper calibrate e rifinite a rasoio tradizionale.</span>
+            </div>
+            <div class="side-feature">
+              <strong>✦ Sagomatura Barba &amp; Panno Caldo</strong>
+              <span>Rituale all'italiana: impacco caldo emolliente, oli essenziali e definizione dei contorni a mano libera.</span>
+            </div>
+            <div class="side-feature">
+              <strong>✦ Ambiente Riservato 1-to-1</strong>
+              <span>Zero confusione, zero attese in sala. Il salone è interamente riservato a te per tutta la durata del trattamento.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="side-panel-cta-group">
+          <a href="https://takecare.app" target="_blank" rel="noopener noreferrer" class="btn btn-white btn-block">
+            PRENOTA CON MATTIA SU TAKE CARE
+          </a>
+          <a href="https://wa.me/393339928198?text=Ciao%20Mattia,%20vorrei%20fissare%20un%20appuntamento%20con%20te" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-block">
+            SCRIVI DIRETTAMENTE SU WHATSAPP
+          </a>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ============================================================
        FOOTER
   ============================================================ -->
   <footer class="site-footer">
@@ -544,7 +685,7 @@
   </div>
 
   <!-- ============================================================
-       FLOATING WHATSAPP BUTTON (Come nello Screenshot)
+       FLOATING WHATSAPP BUTTON (Fedele allo Screenshot)
   ============================================================ -->
   <a href="https://wa.me/393339928198?text=Ciao%20Barber%20FEB,%20vorrei%20informazioni%20su%20un%20appuntamento" 
      class="whatsapp-float-btn" 
