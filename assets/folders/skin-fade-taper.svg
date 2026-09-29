@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 750" width="100%" height="100%">
+  <rect width="600" height="750" fill="#0b0b0b"/>
+  <!-- Bordo tratteggiato segnaposto -->
+  <rect x="24" y="24" width="552" height="702" rx="12" fill="#111111" stroke="#252525" stroke-width="1.5" stroke-dasharray="6 6"/>
+  
+  <!-- Icona Fotocamera Minimale -->
+  <g transform="translate(252, 230)" stroke="#666666" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 28h72a6 6 0 0 0 6-6V36a6 6 0 0 0-6-6h-14l-6-8H32l-6 8H12a6 6 0 0 0-6 6v40a6 6 0 0 0 6 6z"/>
+    <circle cx="48" cy="46" r="16"/>
+  </g>
+
+  <!-- Tipografia Minimal B&W -->
+  <text x="300" y="380" font-family="'Plus Jakarta Sans', -apple-system, sans-serif" font-size="13" font-weight="700" letter-spacing="4" fill="#777777" text-anchor="middle">SKIN FADE</text>
+  <text x="300" y="425" font-family="'Plus Jakarta Sans', -apple-system, sans-serif" font-size="24" font-weight="500" letter-spacing="0.5" fill="#ffffff" text-anchor="middle">Taper Fade</text>
+  <text x="300" y="460" font-family="'Plus Jakarta Sans', -apple-system, sans-serif" font-size="13" font-weight="400" fill="#888888" text-anchor="middle">Tempie e cono collo sfumati a rasoio</text>
+
+  <!-- Bottone Segnaposto -->
+  <rect x="190" y="505" width="220" height="42" rx="21" fill="#181818" stroke="#333333" stroke-width="1"/>
+  <text x="300" y="531" font-family="'Plus Jakarta Sans', -apple-system, sans-serif" font-size="11" font-weight="600" letter-spacing="2" fill="#cccccc" text-anchor="middle">SPAZIO PER TUA FOTO</text>
+  
+  <!-- Footer Brand -->
+  <text x="300" y="685" font-family="'Plus Jakarta Sans', -apple-system, sans-serif" font-size="10" font-weight="500" letter-spacing="3" fill="#444444" text-anchor="middle">BARBER FEB • MINERBIO</text>
+</svg>

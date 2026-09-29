@@ -2,292 +2,490 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   
   <title>BARBER FEB | Minerbio (BO) - Mattia Fabbri</title>
-  <meta name="description" content="Salone da barbiere a Minerbio (Bologna). Taglio moderno, cura della barba con rifinitura a lametta e trattamenti esclusivi. Prenotazioni su Take Care.">
+  <meta name="description" content="Barber FEB a Minerbio (Bologna). Taglio moderno, sfumature Skin Fade a pelle, cura della barba con panno caldo e lametta. Prenotazioni su Take Care.">
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
   
-  <!-- Font Minimal: Plus Jakarta Sans -->
+  <!-- Font Minimal Editorial: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
   <!-- ============================================================
-       HEADER
+       HEADER (Fedele al layout Mobile)
   ============================================================ -->
   <header class="site-header">
-    <div class="container">
+    <div class="container header-container">
       <div class="header-inner">
-        <a href="#hero" class="brand" aria-label="Home Barber FEB">
+        <a href="#chi-siamo" class="brand" aria-label="Home Barber FEB">
           <img src="assets/logo.svg" alt="B" class="brand-monogram">
           <span class="brand-name">BARBER FEB</span>
         </a>
 
         <ul class="nav-menu" id="nav-links">
-          <li><a href="#hero">Home</a></li>
+          <li><a href="#chi-siamo">Chi Siamo</a></li>
+          <li><a href="#cartelle-tagli">I Tagli</a></li>
           <li><a href="#prezzi">Listino</a></li>
-          <li><a href="#lookbook">Lookbook 360°</a></li>
-          <li><a href="#salone">Il Salone</a></li>
-          <li><a href="#orari-dove">Orari &amp; Mappa</a></li>
+          <li><a href="#recensioni">Recensioni</a></li>
+          <li><a href="#orari-dove">Orari &amp; Dove</a></li>
         </ul>
 
         <div class="header-actions">
-          <a href="https://wa.me/393339928198" target="_blank" rel="noopener noreferrer" class="btn btn-ghost" style="padding: 9px 16px;">
-            WhatsApp
+          <a href="https://takecare.app" target="_blank" rel="noopener noreferrer" class="btn btn-white header-book-btn">
+            PRENOTA ORA
           </a>
-          <a href="https://takecare.app" target="_blank" rel="noopener noreferrer" class="btn btn-white" style="padding: 9px 18px;">
-            Prenota
-          </a>
-          <button class="mobile-toggle" id="mobile-toggle" aria-label="Menu">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <button class="mobile-toggle" id="mobile-toggle" aria-label="Apri Menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
           </button>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- ============================================================
-       HERO SECTION
-  ============================================================ -->
-  <section class="hero" id="hero">
-    <div class="container">
-      <div class="hero-layout">
-        <div>
-          <!-- Titoletto con minimo dettaglio verde -->
-          <span class="eyebrow">BARBERIA • MINERBIO (BO)</span>
+  <main>
+    <!-- ============================================================
+         SEZIONE HERO & CHI SIAMO (Fedele allo Screenshot del Cliente)
+    ============================================================ -->
+    <section class="section-chi-siamo" id="chi-siamo">
+      <div class="container">
+        <!-- Foto del Salone / Taglio in Bianco e Nero -->
+        <div class="salon-hero-frame">
+          <img src="assets/salon-hero.jpg" alt="Barber FEB Salone e Taglio Minerbio" class="salon-hero-img" loading="eager">
+          <div class="salon-badge">MINERBIO • VIA CANALETTO 1</div>
+        </div>
 
-          <h1 class="hero-title">
-            Stile essenziale,<br>precisione assoluta.
-          </h1>
-
-          <p class="hero-desc">
-            L'esperienza di taglio e cura della barba firmata <strong>Mattia Fabbri</strong>. Linee pulite, rifinitura a lametta e massima attenzione ad ogni proporzione.
+        <!-- Blocco Testuale Chi Siamo -->
+        <div class="chi-siamo-content">
+          <h1 class="chi-siamo-title">CHI SIAMO</h1>
+          
+          <p class="chi-siamo-lead">
+            DA BARBER FEB A MINERBIO, CI DEDICHIAMO A OFFRIRE UN'ESPERIENZA DI CORTE E CURA DELLA BARBA DI LIVELLO SUPERIORE. IL NOSTRO OBIETTIVO È VALORIZZARE LO STILE UNICO DI OGNI CLIENTE CON TECNICA, PRECISIONE E PASSIONE.
+          </p>
+          
+          <p class="chi-siamo-subtext">
+            Ogni servizio è pensato per garantire massima cura nei dettagli, dalle sfumature skin fade più pulite fino alla regolazione della barba con panno caldo. Un ambiente moderno, essenziale e rilassante ti aspetta in <a href="#orari-dove" class="underline-link">Via Canaletto 1</a>.
           </p>
 
-          <div class="hero-status" id="live-status-pill">
+          <!-- Orario Live Dinamico -->
+          <div class="live-status-bar" id="live-status-pill">
             <span class="status-indicator"></span>
-            <span>Verifica orario...</span>
+            <span class="status-label">Verifica orari in corso...</span>
           </div>
 
-          <div class="hero-buttons">
-            <a href="https://takecare.app" target="_blank" rel="noopener noreferrer" class="btn btn-white">
-              Prenota su Take Care
-            </a>
-            <a href="#lookbook" class="btn btn-ghost">
-              Vedi Lookbook
+          <!-- Pulsante di Prenotazione Primario -->
+          <div class="chi-siamo-cta">
+            <a href="https://takecare.app" target="_blank" rel="noopener noreferrer" class="btn btn-white btn-block">
+              PRENOTA UN APPUNTAMENTO
             </a>
           </div>
         </div>
+      </div>
+    </section>
 
-        <div>
-          <div class="hero-image-wrap" onclick="openLookModal('look-1')">
-            <img src="assets/placeholders/look-1-front.svg" alt="Taglio Barber FEB">
-            <div class="hero-image-caption">
-              <span>Low Taper Fade</span>
-              <span style="color: var(--accent-green);">Guarda 360° →</span>
+    <!-- ============================================================
+         CARTELLE FOTOGRAFICHE DEI TAGLI (Scorrimento per Smartphone)
+    ============================================================ -->
+    <section class="section section-cartelle" id="cartelle-tagli">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">— PORTFOLIO &amp; STILI —</span>
+          <h2 class="section-title">Le Nostre Cartelle</h2>
+          <p class="section-desc">
+            Esplora le collezioni dei tagli e trattamenti firmati Barber FEB. Scorri orizzontalmente per scoprire ogni stile.
+          </p>
+        </div>
+
+        <!-- CARTELLA 1: SKIN FADE -->
+        <div class="folder-group">
+          <div class="folder-header">
+            <div class="folder-title-wrap">
+              <span class="folder-num">01</span>
+              <div>
+                <h3 class="folder-title">Skin Fade</h3>
+                <span class="folder-subtitle">Sfumature a pelle, cono nuca e precisione millimetrica</span>
+              </div>
+            </div>
+            <span class="scroll-hint">Scorri ➔</span>
+          </div>
+
+          <div class="folder-scroll-track" tabindex="0" aria-label="Cartella Skin Fade">
+            <!-- Riquadro 1: Mullet -->
+            <div class="photo-card" onclick="openPhotoModal('Mullet', 'Skin Fade', 'assets/folders/skin-fade-mullet.svg', 'Sfumatura a pelle sui lati e texture naturale superiore')">
+              <div class="photo-card-img-wrap">
+                <img src="assets/folders/skin-fade-mullet.svg" alt="Mullet Skin Fade" loading="lazy">
+              </div>
+              <div class="photo-card-info">
+                <span class="photo-card-cat">SKIN FADE</span>
+                <h4 class="photo-card-name">Mullet</h4>
+                <p class="photo-card-detail">Sfumatura a pelle &amp; texture</p>
+              </div>
+            </div>
+
+            <!-- Riquadro 2: Taper Fade -->
+            <div class="photo-card" onclick="openPhotoModal('Low Taper Fade', 'Skin Fade', 'assets/folders/skin-fade-taper.svg', 'Tempie e nuca sfumati con precisione a rasoio')">
+              <div class="photo-card-img-wrap">
+                <img src="assets/folders/skin-fade-taper.svg" alt="Low Taper Fade" loading="lazy">
+              </div>
+              <div class="photo-card-info">
+                <span class="photo-card-cat">SKIN FADE</span>
+                <h4 class="photo-card-name">Taper Fade</h4>
+                <p class="photo-card-detail">Tempie e cono collo sfumati</p>
+              </div>
+            </div>
+
+            <!-- Riquadro 3: Sfumatura Bassa -->
+            <div class="photo-card" onclick="openPhotoModal('Sfumatura Bassa', 'Skin Fade', 'assets/folders/skin-fade-low.svg', 'Low fade pulita e sagomata con pettine e macchinetta')">
+              <div class="photo-card-img-wrap">
+                <img src="assets/folders/skin-fade-low.svg" alt="Sfumatura Bassa" loading="lazy">
+              </div>
+              <div class="photo-card-info">
+                <span class="photo-card-cat">SKIN FADE</span>
+                <h4 class="photo-card-name">Sfumatura Bassa</h4>
+                <p class="photo-card-detail">Low skin fade millimetrica</p>
+              </div>
+            </div>
+
+            <!-- Riquadro 4: Buzz Cut -->
+            <div class="photo-card" onclick="openPhotoModal('Buzz Cut Fade', 'Skin Fade', 'assets/folders/skin-fade-buzz.svg', 'Taglio rasato con sfumatura skin fade e linea frontale definita')">
+              <div class="photo-card-img-wrap">
+                <img src="assets/folders/skin-fade-buzz.svg" alt="Buzz Cut Fade" loading="lazy">
+              </div>
+              <div class="photo-card-info">
+                <span class="photo-card-cat">SKIN FADE</span>
+                <h4 class="photo-card-name">Buzz Cut</h4>
+                <p class="photo-card-detail">Taglio rasato con sfumatura pulita</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARTELLA 2: TAGLIO CLASSICO -->
+        <div class="folder-group">
+          <div class="folder-header">
+            <div class="folder-title-wrap">
+              <span class="folder-num">02</span>
+              <div>
+                <h3 class="folder-title">Taglio Classico</h3>
+                <span class="folder-subtitle">Tradizione artigianale a pettine e forbici</span>
+              </div>
+            </div>
+            <span class="scroll-hint">Scorri ➔</span>
+          </div>
+
+          <div class="folder-scroll-track" tabindex="0" aria-label="Cartella Taglio Classico">
+            <!-- Riquadro 1: Pettine & Forbici -->
+            <div class="photo-card" onclick="openPhotoModal('Pettine & Forbici', 'Taglio Classico', 'assets/folders/classico-forbici.svg', 'Tecnica tradizionale artigianale con forbici per il massimo rispetto dei volumi')">
+              <div class="photo-card-img-wrap">
+                <img src="assets/folders/classico-forbici.svg" alt="Taglio Pettine &amp; Forbici" loading="lazy">
+              </div>
+              <div class="photo-card-info">
+                <span class="photo-card-cat">TAGLIO CLASSICO</span>
+                <h4 class="photo-card-name">Pettine &amp; Forbici</h4>
+                <p class="photo-card-detail">Lavoro artigianale tradizionale</p>
+              </div>
+            </div>
+
+            <!-- Riquadro 2: Gentleman Cut -->
+            <div class="photo-card" onclick="openPhotoModal('Gentleman Cut', 'Taglio Classico', 'assets/folders/classico-gentleman.svg', 'Riga laterale, ordine e finitura con brillantezza naturale')">
+              <div class="photo-card-img-wrap">
+                <img src="assets/folders/classico-gentleman.svg" alt="Gentleman Cut" loading="lazy">
+              </div>
+              <div class="photo-card-info">
+                <span class="photo-card-cat">TAGLIO CLASSICO</span>
+                <h4 class="photo-card-name">Gentleman Cut</h4>
+                <p class="photo-card-detail">Riga laterale e finitura classica</p>
+              </div>
+            </div>
+
+            <!-- Riquadro 3: Stile Uomo Elegante -->
+            <div class="photo-card" onclick="openPhotoModal('Stile Uomo Elegante', 'Taglio Classico', 'assets/folders/classico-senior.svg', 'Taglio sobrio ed elegante dedicato all\'uomo che ama l\'eleganza senza tempo')">
+              <div class="photo-card-img-wrap">
+                <img src="assets/folders/classico-senior.svg" alt="Stile Uomo Elegante" loading="lazy">
+              </div>
+              <div class="photo-card-info">
+                <span class="photo-card-cat">TAGLIO CLASSICO</span>
+                <h4 class="photo-card-name">Stile Uomo Elegante</h4>
+                <p class="photo-card-detail">Proporzioni naturali senza tempo</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARTELLA 3: BARBA SFUMATA -->
+        <div class="folder-group">
+          <div class="folder-header">
+            <div class="folder-title-wrap">
+              <span class="folder-num">03</span>
+              <div>
+                <h3 class="folder-title">Barba Sfumata</h3>
+                <span class="folder-subtitle">Rifinitura a rasoio tradizionale e rituale panno caldo</span>
+              </div>
+            </div>
+            <span class="scroll-hint">Scorri ➔</span>
+          </div>
+
+          <div class="folder-scroll-track" tabindex="0" aria-label="Cartella Barba Sfumata">
+            <!-- Riquadro 1: Sagomatura a Lametta -->
+            <div class="photo-card" onclick="openPhotoModal('Sagomatura a Lametta', 'Barba Sfumata', 'assets/folders/barba-lametta.svg', 'Contorni geometrici impeccabili rifiniti a mano libera con rasoio')">
+              <div class="photo-card-img-wrap">
+                <img src="assets/folders/barba-lametta.svg" alt="Sagomatura a Lametta" loading="lazy">
+              </div>
+              <div class="photo-card-info">
+                <span class="photo-card-cat">BARBA SFUMATA</span>
+                <h4 class="photo-card-name">Sagomatura a Lametta</h4>
+                <p class="photo-card-detail">Definizione guance e sottomento</p>
+              </div>
+            </div>
+
+            <!-- Riquadro 2: Sfumatura Basette -->
+            <div class="photo-card" onclick="openPhotoModal('Sfumatura Basette', 'Barba Sfumata', 'assets/folders/barba-sfumata.svg', 'Transizione continua e sfumata tra tempia, basetta e barba')">
+              <div class="photo-card-img-wrap">
+                <img src="assets/folders/barba-sfumata.svg" alt="Sfumatura Basette" loading="lazy">
+              </div>
+              <div class="photo-card-info">
+                <span class="photo-card-cat">BARBA SFUMATA</span>
+                <h4 class="photo-card-name">Sfumatura Basette</h4>
+                <p class="photo-card-detail">Transizione armonica capelli-barba</p>
+              </div>
+            </div>
+
+            <!-- Riquadro 3: Trattamento Panno Caldo -->
+            <div class="photo-card" onclick="openPhotoModal('Trattamento Panno Caldo', 'Barba Sfumata', 'assets/folders/barba-panno-caldo.svg', 'Apertura dei pori, oli essenziali nutrienti e rasatura morbida anti-irritazione')">
+              <div class="photo-card-img-wrap">
+                <img src="assets/folders/barba-panno-caldo.svg" alt="Trattamento Panno Caldo" loading="lazy">
+              </div>
+              <div class="photo-card-info">
+                <span class="photo-card-cat">BARBA SFUMATA</span>
+                <h4 class="photo-card-name">Panno Caldo</h4>
+                <p class="photo-card-detail">Rituale emolliente e idratazione</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         LISTINO PREZZI (BIANCO E NERO ESSENZIALE)
+    ============================================================ -->
+    <section class="section" id="prezzi">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">— SERVIZI &amp; TARIFFE —</span>
+          <h2 class="section-title">Listino Ufficiale</h2>
+          <p class="section-desc">
+            Trasparenza e massima cura. Per prenotare e scegliere orari specifici accedi a Take Care.
+          </p>
+        </div>
+
+        <div class="price-list-minimal">
+          <!-- 1. Taglio -->
+          <div class="price-row">
+            <div class="price-info">
+              <div class="price-name">Taglio</div>
+              <div class="price-sub">Consulenza, taglio personalizzato a forbice o macchinetta e styling finale.</div>
+            </div>
+            <div class="price-cost">15 €</div>
+          </div>
+
+          <!-- 2. Barba con rifinitura lametta -->
+          <div class="price-row">
+            <div class="price-info">
+              <div class="price-name">Barba con Rifinitura Lametta</div>
+              <div class="price-sub">Modellatura sagomata e definizione impeccabile dei contorni a rasoio tradizionale.</div>
+            </div>
+            <div class="price-cost">15 €</div>
+          </div>
+
+          <!-- 3. Taglio & Shampoo -->
+          <div class="price-row">
+            <div class="price-info">
+              <div class="price-name">Taglio &amp; Shampoo</div>
+              <div class="price-sub">Taglio completo con lavaggio cute rinfrescante e asciugatura con prodotti dedicati.</div>
+            </div>
+            <div class="price-cost">18 €</div>
+          </div>
+
+          <!-- 4. Taglio + Barba -->
+          <div class="price-row">
+            <div class="price-info">
+              <div class="price-name">Taglio + Barba</div>
+              <div class="price-sub">Il servizio completo per la massima armonia tra sfumatura capelli e sagomatura barba.</div>
+            </div>
+            <div class="price-cost">25 €</div>
+          </div>
+
+          <!-- 5. Taglio + Trattamento Viso + Shampoo -->
+          <div class="price-row">
+            <div class="price-info">
+              <div class="price-name">Taglio + Trattamento Viso + Shampoo</div>
+              <div class="price-sub">Rituale completo di cura maschile: taglio, lavaggio rinvigorente e trattamento viso.</div>
+            </div>
+            <div class="price-cost">25 €</div>
+          </div>
+
+          <div class="price-footer-cta">
+            <span class="price-footer-text">
+              Prenotazione immediata su Take Care senza attese.
+            </span>
+            <div class="price-footer-btns">
+              <a href="https://wa.me/393339928198?text=Ciao%20Barber%20FEB,%20vorrei%20informazioni%20su%20un%20appuntamento" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+                WhatsApp
+              </a>
+              <a href="https://takecare.app" target="_blank" rel="noopener noreferrer" class="btn btn-white">
+                Prenota su Take Care
+              </a>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ============================================================
-       LISTINO PREZZI (EDITORIAL & MINIMAL)
-  ============================================================ -->
-  <section class="section" id="prezzi">
-    <div class="container">
-      <div class="section-header">
-        <!-- Titoletto con minimo dettaglio verde -->
-        <span class="eyebrow">SERVIZI &amp; TARIFFE</span>
-        <h2 class="section-title">Listino Ufficiale</h2>
-        <p class="section-desc">
-          Tutti i prezzi sono trasparenti. Disponibilità, calendari orari e opzioni aggiuntive sono consultabili in tempo reale sull'app Take Care.
-        </p>
-      </div>
-
-      <div class="price-list-minimal">
-        <!-- 1. Taglio -->
-        <div class="price-row">
-          <div class="price-info">
-            <div class="price-name">Taglio</div>
-            <div class="price-sub">Consulenza, taglio personalizzato a forbice o macchinetta e styling finale.</div>
+    <!-- ============================================================
+         SEZIONE RECENSIONI GOOGLE (Fedele al Mockup fornito)
+    ============================================================ -->
+    <section class="section section-reviews" id="recensioni">
+      <div class="container">
+        
+        <!-- Recensione Card in evidenza (come nello screenshot inviato) -->
+        <div class="google-review-card-featured">
+          <div class="google-review-badge">
+            <span class="badge-line"></span>
+            <span class="badge-text">LE RECENSIONI SU GOOGLE</span>
+            <span class="badge-line"></span>
           </div>
-          <div class="price-cost">15 €</div>
-        </div>
 
-        <!-- 2. Barba con rifinitura lametta -->
-        <div class="price-row">
-          <div class="price-info">
-            <div class="price-name">Barba con Rifinitura Lametta</div>
-            <div class="price-sub">Modellatura sagomata e definizione impeccabile dei contorni a rasoio tradizionale.</div>
-          </div>
-          <div class="price-cost">15 €</div>
-        </div>
+          <blockquote class="google-review-quote">
+            “Son venuto fin da Milano per tagliarmi i capelli qui e mi ha fatto il miglior taglio che potessi desiderare.”
+          </blockquote>
 
-        <!-- 3. Taglio & Shampoo -->
-        <div class="price-row">
-          <div class="price-info">
-            <div class="price-name">Taglio &amp; Shampoo</div>
-            <div class="price-sub">Taglio completo con lavaggio cute rinfrescante e asciugatura con prodotti dedicati.</div>
-          </div>
-          <div class="price-cost">18 €</div>
-        </div>
-
-        <!-- 4. Taglio + Barba -->
-        <div class="price-row">
-          <div class="price-info">
-            <div class="price-name">Taglio + Barba</div>
-            <div class="price-sub">Il servizio completo per la massima armonia tra sfumatura capelli e sagomatura barba.</div>
-          </div>
-          <div class="price-cost">25 €</div>
-        </div>
-
-        <!-- 5. Taglio + Trattamento Viso + Shampoo -->
-        <div class="price-row">
-          <div class="price-info">
-            <div class="price-name">Taglio + Trattamento Viso + Shampoo</div>
-            <div class="price-sub">Rituale completo di cura maschile: taglio, lavaggio rinvigorente e trattamento viso.</div>
-          </div>
-          <div class="price-cost">25 €</div>
-        </div>
-
-        <div class="price-footer-cta">
-          <span style="color: var(--text-secondary); font-size: 0.88rem;">
-            Prenotazione istantanea senza tempi di attesa.
-          </span>
-          <div style="display: flex; gap: 14px;">
-            <a href="https://wa.me/393339928198?text=Ciao%20Barber%20FEB,%20vorrei%20informazioni%20su%20un%20appuntamento" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
-              Chiedi su WhatsApp
-            </a>
-            <a href="https://takecare.app" target="_blank" rel="noopener noreferrer" class="btn btn-white">
-              Apri Take Care
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       LOOKBOOK 360° MULTI-ANGOLAZIONE
-  ============================================================ -->
-  <section class="section" id="lookbook">
-    <div class="container">
-      <div class="section-header">
-        <!-- Titoletto con minimo dettaglio verde -->
-        <span class="eyebrow">PORTFOLIO MULTI-ANGOLAZIONE</span>
-        <h2 class="section-title">I Tagli</h2>
-        <p class="section-desc">
-          Seleziona un modello per osservare il taglio in tutte le sue angolazioni: frontale, profili laterali, retro e precisione della sfumatura.
-        </p>
-      </div>
-
-      <!-- Barra Filtri & Selettore Vista Opzione A vs Opzione B -->
-      <div class="lookbook-nav">
-        <div class="filter-group">
-          <button class="filter-btn active" data-filter="all">Tutti</button>
-          <button class="filter-btn" data-filter="taglio">Taglio</button>
-          <button class="filter-btn" data-filter="barba">Barba</button>
-          <button class="filter-btn" data-filter="combo">Combo</button>
-          <button class="filter-btn" data-filter="colore">Colore</button>
-        </div>
-
-        <div class="view-toggle">
-          <button class="view-toggle-btn active" data-mode="option-a">
-            Opzione A: Visualizzatore
-          </button>
-          <button class="view-toggle-btn" data-mode="option-b">
-            Opzione B: 4 Angolazioni
-          </button>
-        </div>
-      </div>
-
-      <!-- Contenitore dinamico -->
-      <div id="lookbook-content-area"></div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       IL SALONE
-  ============================================================ -->
-  <section class="section" id="salone">
-    <div class="container">
-      <div style="max-width: 680px;">
-        <!-- Titoletto con minimo dettaglio verde -->
-        <span class="eyebrow">IL SALONE</span>
-        <h2 class="section-title">Barber FEB</h2>
-        <p style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.8; margin-bottom: 24px;">
-          Nel salone di <strong>Via Canaletto 1 a Minerbio</strong>, Mattia Fabbri unisce la pulizia del mestiere artigianale della lametta con le tendenze contemporanee. Un ambiente sobrio, ordinato e riservato dove il cliente riceve una consulenza personalizzata sulle proprie linee naturali.
-        </p>
-        <div style="display: flex; gap: 24px; align-items: center;">
-          <a href="https://instagram.com/barber_feb" target="_blank" rel="noopener noreferrer" class="btn-link">
-            Instagram @barber_feb
-          </a>
-          <a href="https://takecare.app" target="_blank" rel="noopener noreferrer" class="btn-link">
-            App Take Care
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       ORARI & DOVE SIAMO
-  ============================================================ -->
-  <section class="section" id="orari-dove">
-    <div class="container">
-      <div class="section-header">
-        <!-- Titoletto con minimo dettaglio verde -->
-        <span class="eyebrow">MINERBIO (BO)</span>
-        <h2 class="section-title">Orari &amp; Posizione</h2>
-      </div>
-
-      <div class="info-grid">
-        <!-- Tabella Orari -->
-        <div class="info-box">
-          <span style="font-size: 0.76rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-secondary);">Orari di Apertura</span>
-          <table class="timetable">
-            <tbody>
-              <tr id="row-lun"><td class="day">Lunedì</td><td class="hours">13:30 – 20:00</td></tr>
-              <tr id="row-mar"><td class="day">Martedì</td><td class="hours">09:00 – 12:30 / 13:00 – 20:00</td></tr>
-              <tr id="row-mer"><td class="day">Mercoledì</td><td class="hours">09:00 – 12:30 / 13:30 – 21:00</td></tr>
-              <tr id="row-gio"><td class="day">Giovedì</td><td class="hours">09:00 – 12:30 / 13:30 – 21:00</td></tr>
-              <tr id="row-ven"><td class="day">Venerdì</td><td class="hours">09:00 – 12:30 / 13:30 – 21:00</td></tr>
-              <tr id="row-sab"><td class="day">Sabato</td><td class="hours">08:00 – 13:30</td></tr>
-              <tr id="row-dom"><td class="day">Domenica</td><td class="hours" style="color: #666;">Chiuso</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- Mappa & Indirizzo -->
-        <div class="info-box">
-          <span style="font-size: 0.76rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-secondary);">Come Raggiungerci</span>
-          <div class="map-frame">
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2841.8741369719365!2d11.47895311242371!3d44.62215357095697!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477fd15f60e909a3%3A0xe54d45543c7b6058!2sVia%20Canaletto%2C%201%2C%2040061%20Minerbio%20BO!5e0!3m2!1sit!2sit!4v1710000000000!5m2!1sit!2sit" 
-              title="Mappa Barber FEB Minerbio Via Canaletto 1"
-              loading="lazy">
-            </iframe>
-          </div>
-          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
-            <div>
-              <div style="color: #fff; font-weight: 500;">Via Canaletto 1, 40061 Minerbio (BO)</div>
-              <div style="color: var(--text-secondary); font-size: 0.85rem;">Tel: +39 333 992 8198</div>
+          <div class="google-review-author-row">
+            <div class="google-review-stars" aria-label="5 stelle su 5">
+              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
             </div>
-            <a href="https://maps.google.com/?q=Via+Canaletto+1+Minerbio+BO" target="_blank" rel="noopener noreferrer" class="btn btn-ghost" style="padding: 8px 16px;">
-              Naviga
-            </a>
+            <div class="google-review-author">LUCA F. • GOOGLE</div>
           </div>
         </div>
+
+        <!-- Altre recensioni Google in scorrimento orizzontale touch -->
+        <div class="reviews-slider-track">
+          <div class="review-mini-card">
+            <div class="mini-stars">★★★★★</div>
+            <p class="mini-text">“Precisione incredibile sulla sfumatura Skin Fade. Ambiente curato nei minimi dettagli e grande professionalità.”</p>
+            <div class="mini-author">MATTEO R. • GOOGLE</div>
+          </div>
+
+          <div class="review-mini-card">
+            <div class="mini-stars">★★★★★</div>
+            <p class="mini-text">“Modellatura barba con panno caldo rilassante e perfetta. Mattia ha una manualità con la lametta unica.”</p>
+            <div class="mini-author">ANDREA S. • GOOGLE</div>
+          </div>
+
+          <div class="review-mini-card">
+            <div class="mini-stars">★★★★★</div>
+            <p class="mini-text">“Il miglior barbiere di Minerbio e provincia di Bologna. Puntualità impeccabile e risultato sempre al top.”</p>
+            <div class="mini-author">GABRIELE B. • GOOGLE</div>
+          </div>
+        </div>
+
+        <!-- Call to action recensioni -->
+        <div class="reviews-cta-wrap">
+          <div class="google-rating-score">
+            <span class="score-num">5.0</span>
+            <span class="score-stars">★★★★★</span>
+            <span class="score-count">Media recensioni Google</span>
+          </div>
+          <a href="https://maps.google.com/?q=Via+Canaletto+1+Minerbio+BO" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+            Scrivi una Recensione su Google
+          </a>
+        </div>
+
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- ============================================================
+         ORARI, DOVE SIAMO & PRENOTAZIONE TAKE CARE
+    ============================================================ -->
+    <section class="section section-orari" id="orari-dove">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">— MINERBIO (BO) —</span>
+          <h2 class="section-title">Orari &amp; Dove Siamo</h2>
+          <p class="section-desc">
+            Ti aspettiamo in Via Canaletto 1 a Minerbio. Parcheggio comodo disponibile.
+          </p>
+        </div>
+
+        <div class="info-grid">
+          <!-- Orari di Apertura -->
+          <div class="info-box">
+            <div class="info-box-header">
+              <span class="info-box-tag">ORARI DI APERTURA</span>
+              <span class="info-box-status" id="schedule-quick-badge">Aperto / Chiuso</span>
+            </div>
+            
+            <table class="timetable">
+              <tbody>
+                <tr id="row-lun"><td class="day">Lunedì</td><td class="hours">13:30 – 20:00</td></tr>
+                <tr id="row-mar"><td class="day">Martedì</td><td class="hours">09:00 – 12:30 / 13:00 – 20:00</td></tr>
+                <tr id="row-mer"><td class="day">Mercoledì</td><td class="hours">09:00 – 12:30 / 13:30 – 21:00</td></tr>
+                <tr id="row-gio"><td class="day">Giovedì</td><td class="hours">09:00 – 12:30 / 13:30 – 21:00</td></tr>
+                <tr id="row-ven"><td class="day">Venerdì</td><td class="hours">09:00 – 12:30 / 13:30 – 21:00</td></tr>
+                <tr id="row-sab"><td class="day">Sabato</td><td class="hours">08:00 – 13:30</td></tr>
+                <tr id="row-dom"><td class="day">Domenica</td><td class="hours text-muted">Chiuso</td></tr>
+              </tbody>
+            </table>
+
+            <div class="info-box-takecare-cta">
+              <p class="takecare-hint">Prenota il tuo orario comodamente dal telefono:</p>
+              <a href="https://takecare.app" target="_blank" rel="noopener noreferrer" class="btn btn-white btn-block">
+                PRENOTA SU TAKE CARE
+              </a>
+            </div>
+          </div>
+
+          <!-- Mappa e Posizione -->
+          <div class="info-box">
+            <div class="info-box-header">
+              <span class="info-box-tag">COME RAGGIUNGERCI</span>
+              <span class="info-box-city">MINERBIO (BO)</span>
+            </div>
+
+            <div class="map-frame">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2841.8741369719365!2d11.47895311242371!3d44.62215357095697!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477fd15f60e909a3%3A0xe54d45543c7b6058!2sVia%20Canaletto%2C%201%2C%2040061%20Minerbio%20BO!5e0!3m2!1sit!2sit!4v1710000000000!5m2!1sit!2sit" 
+                title="Mappa Barber FEB Minerbio Via Canaletto 1"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+            </div>
+
+            <div class="address-details">
+              <div class="address-text-group">
+                <div class="address-title">Via Canaletto 1, 40061 Minerbio (BO)</div>
+                <div class="address-sub">Salone Mattia Fabbri • Tel: +39 333 992 8198</div>
+              </div>
+              <a href="https://maps.google.com/?q=Via+Canaletto+1+Minerbio+BO" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm">
+                Naviga su Mappe
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
 
   <!-- ============================================================
        FOOTER
@@ -296,10 +494,10 @@
     <div class="container">
       <div class="footer-row">
         <div>
-          <div style="color: #fff; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px;">BARBER FEB</div>
-          <div>Minerbio (BO) • Mattia Fabbri</div>
+          <div class="footer-brand">BARBER FEB</div>
+          <div class="footer-sub">Minerbio (BO) • Mattia Fabbri</div>
         </div>
-        <div style="display: flex; gap: 20px;">
+        <div class="footer-links">
           <a href="https://takecare.app" target="_blank" rel="noopener noreferrer">Take Care</a>
           <a href="https://wa.me/393339928198" target="_blank" rel="noopener noreferrer">WhatsApp</a>
           <a href="https://instagram.com/barber_feb" target="_blank" rel="noopener noreferrer">Instagram</a>
@@ -316,70 +514,75 @@
   </footer>
 
   <!-- ============================================================
-       MODAL 360° LIGHTBOX (OPZIONE A)
+       MODALE DETTAGLIO FOTO / LIGHTBOX
   ============================================================ -->
-  <div class="modal-overlay" id="look-modal" role="dialog" aria-modal="true">
+  <div class="modal-overlay" id="photo-modal" role="dialog" aria-modal="true">
     <div class="modal-box">
       <div class="modal-top">
         <div>
-          <span class="eyebrow" id="modal-look-category" style="margin: 0 0 2px 0;">TAGLIO</span>
-          <h3 id="modal-look-title" style="font-size: 1.15rem; font-weight: 500;">Nome Taglio</h3>
+          <span class="modal-cat" id="modal-photo-cat">SKIN FADE</span>
+          <h3 class="modal-title" id="modal-photo-title">Nome Taglio</h3>
         </div>
-        <button class="modal-close" onclick="closeLookModal()" aria-label="Chiudi">✕</button>
+        <button class="modal-close" onclick="closePhotoModal()" aria-label="Chiudi Finestra">✕</button>
       </div>
 
-      <div class="modal-content">
-        <div class="modal-viewer">
-          <img id="modal-main-img" src="" alt="Angolazione taglio">
-          <button class="modal-arrow prev" onclick="prevModalAngle()" aria-label="Precedente">←</button>
-          <button class="modal-arrow next" onclick="nextModalAngle()" aria-label="Successivo">→</button>
+      <div class="modal-body">
+        <div class="modal-image-container">
+          <img id="modal-photo-img" src="" alt="Dettaglio stile">
         </div>
-
-        <div style="display: flex; justify-content: space-between; align-items: baseline;">
-          <div id="modal-angle-label" style="font-size: 0.85rem; font-weight: 600; color: #fff;">Vista Frontale</div>
-          <div id="modal-angle-desc" style="font-size: 0.82rem; color: var(--text-secondary);">Descrizione</div>
-        </div>
-
-        <div class="modal-angles-bar" id="modal-angle-thumbs"></div>
+        <p class="modal-desc" id="modal-photo-desc">Descrizione dello stile</p>
       </div>
 
       <div class="modal-bottom">
-        <span style="font-size: 0.82rem; color: var(--text-secondary);">Desideri questo stile?</span>
-        <div style="display: flex; gap: 10px;">
-          <a href="https://wa.me/393339928198" target="_blank" rel="noopener noreferrer" class="btn btn-ghost" style="padding: 8px 14px;">WhatsApp</a>
-          <a href="https://takecare.app" target="_blank" rel="noopener noreferrer" class="btn btn-white" style="padding: 8px 16px;">Prenota su Take Care</a>
+        <span class="modal-cta-text">Vuoi prenotare questo taglio?</span>
+        <div class="modal-cta-buttons">
+          <a href="https://wa.me/393339928198" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm">WhatsApp</a>
+          <a href="https://takecare.app" target="_blank" rel="noopener noreferrer" class="btn btn-white btn-sm">Prenota</a>
         </div>
       </div>
     </div>
   </div>
 
   <!-- ============================================================
+       FLOATING WHATSAPP BUTTON (Come nello Screenshot)
+  ============================================================ -->
+  <a href="https://wa.me/393339928198?text=Ciao%20Barber%20FEB,%20vorrei%20informazioni%20su%20un%20appuntamento" 
+     class="whatsapp-float-btn" 
+     target="_blank" 
+     rel="noopener noreferrer" 
+     aria-label="Contatta su WhatsApp">
+    <svg viewBox="0 0 32 32" width="28" height="28" fill="#ffffff">
+      <path d="M16 2C8.28 2 2 8.28 2 16c0 2.72.77 5.26 2.11 7.42L2 30l6.77-2.07C10.87 29.25 13.36 30 16 30c7.72 0 14-6.28 14-14S23.72 2 16 2zm0 25.62c-2.31 0-4.48-.68-6.32-1.85l-.45-.29-4.21 1.29 1.3-4.1-.3-.47C4.74 20.35 4.08 18.23 4.08 16c0-6.57 5.35-11.92 11.92-11.92s11.92 5.35 11.92 11.92-5.35 11.92-11.92 11.92zm6.54-8.94c-.36-.18-2.12-1.05-2.45-1.17-.33-.12-.57-.18-.81.18-.24.36-.93 1.17-1.14 1.41-.21.24-.42.27-.78.09-.36-.18-1.52-.56-2.9-1.79-1.07-.96-1.79-2.14-2-2.5-.21-.36-.02-.56.16-.74.16-.16.36-.42.54-.63.18-.21.24-.36.36-.6.12-.24.06-.45-.03-.63-.09-.18-.81-1.95-1.11-2.67-.29-.7-.59-.6-.81-.61-.21-.01-.45-.01-.69-.01-.24 0-.63.09-.96.45-.33.36-1.26 1.23-1.26 3s1.29 3.48 1.47 3.72c.18.24 2.54 3.88 6.15 5.44.86.37 1.53.59 2.05.76.86.27 1.64.23 2.26.14.69-.1 2.12-.87 2.42-1.71.3-.84.3-1.56.21-1.71-.09-.15-.33-.24-.69-.42z"/>
+    </svg>
+  </a>
+
+  <!-- ============================================================
        COOKIE BANNER GDPR DISCRETO
   ============================================================ -->
   <div class="cookie-banner-minimal" id="cookie-banner">
     <p>
-      Questo sito utilizza cookie tecnici strettamente necessari al funzionamento e alle tue preferenze di navigazione. Nessun dato viene utilizzato a fini pubblicitari.
+      Questo sito utilizza cookie tecnici strettamente necessari al funzionamento e alle preferenze di navigazione.
     </p>
     <div class="cookie-btn-row">
-      <button class="btn btn-white" id="cookie-accept-all">Accetta</button>
-      <button class="btn btn-ghost" id="cookie-accept-essential">Solo Tecnici</button>
+      <button class="btn btn-white btn-sm" id="cookie-accept-all">Accetta</button>
+      <button class="btn btn-ghost btn-sm" id="cookie-accept-essential">Solo Tecnici</button>
     </div>
   </div>
 
   <!-- MODALE PRIVACY -->
   <div class="modal-overlay" id="gdpr-modal">
-    <div class="modal-box" style="max-width: 540px; padding: 28px;">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-        <h3 style="font-size: 1.2rem;">Informativa Cookie &amp; Privacy</h3>
+    <div class="modal-box modal-box-sm">
+      <div class="modal-top">
+        <h3 class="modal-title">Informativa Cookie &amp; Privacy</h3>
         <button class="modal-close" id="gdpr-close-modal">✕</button>
       </div>
-      <p style="color: var(--text-secondary); font-size: 0.85rem; line-height: 1.6; margin-bottom: 14px;">
-        Barber FEB di Mattia Fabbri (Via Canaletto 1, Minerbio) tutela la tua privacy. Questo sito statico raccoglie esclusivamente cookie tecnici essenziali memorizzati localmente nel tuo browser per salvare le preferenze di navigazione.
+      <p style="color: var(--text-secondary); font-size: 0.88rem; line-height: 1.6; margin-bottom: 16px;">
+        Barber FEB di Mattia Fabbri (Via Canaletto 1, Minerbio) tutela la tua privacy. Questo sito statico memorizza esclusivamente preferenze tecniche essenziali in locale.
       </p>
-      <p style="color: var(--text-secondary); font-size: 0.85rem; line-height: 1.6; margin-bottom: 20px;">
-        I collegamenti alle piattaforme esterne (Take Care, WhatsApp, Google Maps, Instagram) rimandano ai rispettivi siti che operano secondo le loro policy autonome.
+      <p style="color: var(--text-secondary); font-size: 0.88rem; line-height: 1.6; margin-bottom: 24px;">
+        I link esterni (Take Care, WhatsApp, Google Maps, Instagram) rimandano alle rispettive piattaforme terze secondo i loro termini di servizio.
       </p>
-      <button class="btn btn-white" onclick="closeGdprModal()" style="width: 100%;">Chiudi</button>
+      <button class="btn btn-white btn-block" onclick="closeGdprModal()">Chiudi</button>
     </div>
   </div>
 
