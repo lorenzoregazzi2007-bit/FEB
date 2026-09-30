@@ -53,7 +53,7 @@ function initIntroScreen() {
     halfB.appendChild(copy);
   }
 
-  // Il colpo di lametta segue la diagonale 72% → 48% dello schermo (centro al 60%)
+  // Il colpo di lametta segue la diagonale 62% → 38% dello schermo (centro al 50%)
   const setSlashGeometry = () => {
     const w = window.innerWidth;
     const rise = window.innerHeight * 0.24;
@@ -75,13 +75,47 @@ function initIntroScreen() {
     setTimeout(() => intro.remove(), 400);
   };
 
+  // Ciuffi di capelli che cadono dalla linea del taglio
+  const dropHair = () => {
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    for (let i = 0; i < 34; i++) {
+      const x = w * (0.5 + (Math.random() - 0.5) * 0.9);
+      const y = h * (0.62 - 0.24 * (x / w));
+      const len = 10 + Math.random() * 18;
+      const bend = (Math.random() - 0.5) * 10;
+      const shade = 170 + Math.floor(Math.random() * 85);
+      const hair = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      hair.setAttribute('class', 'intro-hair');
+      hair.setAttribute('width', '14');
+      hair.setAttribute('height', String(len + 2));
+      hair.setAttribute('viewBox', `0 0 14 ${len + 2}`);
+      hair.style.left = `${x - 7}px`;
+      hair.style.top = `${y - len / 2}px`;
+      hair.innerHTML = `<path d="M7 1 Q ${7 + bend} ${len / 2} 7 ${len + 1}" stroke="rgb(${shade},${shade},${shade})" stroke-width="${1 + Math.random() * 0.8}" stroke-linecap="round" fill="none"/>`;
+      intro.appendChild(hair);
+
+      const r0 = Math.random() * 360;
+      hair.animate([
+        { transform: `translate(0, 0) rotate(${r0}deg)`, opacity: 1 },
+        { transform: `translate(${(Math.random() - 0.5) * 120}px, ${h * (0.35 + Math.random() * 0.4)}px) rotate(${r0 + (Math.random() - 0.5) * 540}deg)`, opacity: 0 }
+      ], {
+        duration: 800 + Math.random() * 500,
+        delay: 120 + (x / w) * 180,
+        easing: 'cubic-bezier(0.35, 0, 0.8, 1)',
+        fill: 'both'
+      });
+    }
+  };
+
   const cut = () => {
     if (cutStarted) return;
     cutStarted = true;
     clearTimeout(autoTimer);
     intro.classList.add('cutting');
+    dropHair();
     setTimeout(() => intro.classList.add('split'), 260);
-    setTimeout(finish, 1000);
+    setTimeout(finish, 1300);
   };
 
   // Tocco, click, Invio o Esc: taglio immediato
@@ -90,8 +124,8 @@ function initIntroScreen() {
     if (['Enter', 'Escape', ' '].includes(e.key)) cut();
   });
 
-  // Sequenza automatica: neon (0–1.3s), zoom (0.55–2.1s), taglio a 2s
-  autoTimer = setTimeout(cut, 2000);
+  // Sequenza automatica: il logo si accende (0.15–1.25s), taglio a 1.8s
+  autoTimer = setTimeout(cut, 1800);
 }
 
 /* ============================================================
