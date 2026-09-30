@@ -11,7 +11,25 @@ document.addEventListener('DOMContentLoaded', () => {
   initScheduleStatus();
   initNavigation();
   setupModalEvents();
+  initMapConsent();
 });
+
+/* ============================================================
+   MAPPA GOOGLE CARICATA SOLO SU RICHIESTA (PRIVACY)
+============================================================ */
+function initMapConsent() {
+  const btn = document.getElementById('map-consent-btn');
+  if (!btn) return;
+
+  btn.addEventListener('click', () => {
+    const iframe = document.createElement('iframe');
+    iframe.src = btn.dataset.src;
+    iframe.title = 'Mappa Barber FEB, Via Canaletto 1, Minerbio';
+    iframe.loading = 'lazy';
+    iframe.referrerPolicy = 'no-referrer-when-downgrade';
+    btn.replaceWith(iframe);
+  });
+}
 
 /* ============================================================
    1. INTRO SCREEN (Forbice che taglia e apre il sito)
@@ -154,26 +172,27 @@ function initBarberSidePanel() {
 /* ============================================================
    4. RECENSIONI GOOGLE A DISSOLVENZA AUTOMATICA (FADE IN/OUT)
 ============================================================ */
+// Recensioni reali dal profilo Google Maps di Barber FEB
 const GOOGLE_REVIEWS = [
   {
-    quote: "“Son venuto fin da Milano per tagliarmi i capelli qui e mi ha fatto il miglior taglio che potessi desiderare.”",
-    author: "LUCA F. • GOOGLE"
+    quote: "“Ottima esperienza: ambiente pulito e accogliente. Il barbiere è molto professionale e attento alle richieste. Taglio preciso e curato nei dettagli, con ottimi prodotti.”",
+    author: "PAZZ P. • GOOGLE"
   },
   {
-    quote: "“Professionalità e cura del dettaglio senza paragoni. Sfumatura a pelle perfetta e barba sagomata con precisione chirurgica.”",
-    author: "ALESSANDRO M. • GOOGLE"
+    quote: "“Taglio fatto benissimo, ragazzo gentile e simpatico. Qualità prezzo uno dei migliori in zona. Lo consiglio assolutamente.”",
+    author: "MATTEO P. • GOOGLE"
   },
   {
-    quote: "“Locale moderno, intimo e pulitissimo. Mattia è un vero professionista che ascolta e valorizza ogni capello. Non lo cambierei per nulla al mondo.”",
-    author: "FEDERICO G. • GOOGLE"
+    quote: "“Ottimo barbiere, lo consiglio vivamente perché merita: posto ben curato, ottimi prodotti, e lui molto gentile e socievole.”",
+    author: "MATTIA • GOOGLE"
   },
   {
-    quote: "“Il trattamento panno caldo e rasatura tradizionale con lametta è un'esperienza da provare. Puntualità impeccabile e grande simpatia.”",
-    author: "DAVIDE T. • GOOGLE"
+    quote: "“Barbiere molto bravo, rapporto qualità prezzo ottimo. Consigliatissimo.”",
+    author: "LUCA P. • GOOGLE"
   },
   {
-    quote: "“Skin fade pulitissima e precisa al millimetro. Se cerchi qualità autentica e cura del cliente a Minerbio, Barber FEB è il posto giusto.”",
-    author: "RICCARDO B. • GOOGLE"
+    quote: "“Sono stato per la prima volta, mi ha fatto un bel taglio e sono rimasto contentissimo.”",
+    author: "GABRIELE M. • GOOGLE"
   }
 ];
 
@@ -264,24 +283,41 @@ function initScheduleStatus() {
     if (row) row.classList.add('today');
   }
 
-  let isOpen = false;
+  // Orari ufficiali (uguali a Google Maps): [apertura, chiusura] in ore decimali
+  const SCHEDULE = {
+    0: [],                         // Domenica chiuso
+    1: [[13, 21]],                 // Lunedì
+    2: [[10, 13], [14, 21]],       // Martedì
+    3: [[10, 13], [14, 21]],       // Mercoledì
+    4: [[10, 13], [14, 21]],       // Giovedì
+    5: [[10, 12.5], [13, 21]],     // Venerdì
+    6: []                          // Sabato chiuso
+  };
+  const DAY_NAMES = ['domenica', 'lunedì', 'martedì', 'mercoledì', 'giovedì', 'venerdì', 'sabato'];
+  const fmt = (h) => `${String(Math.floor(h)).padStart(2, '0')}:${String(Math.round((h % 1) * 60)).padStart(2, '0')}`;
+
+  const todaySlots = SCHEDULE[dayOfWeek];
+  const currentSlot = todaySlots.find(([open, close]) => currentTime >= open && currentTime < close);
+  const isOpen = Boolean(currentSlot);
   let statusDetail = '';
 
-  if (dayOfWeek === 1) { // Lunedì
-    isOpen = (currentTime >= 13.5 && currentTime < 20.0);
-    statusDetail = isOpen ? 'Aperto fino alle 20:00' : (currentTime < 13.5 ? 'Apre oggi alle 13:30' : 'Chiuso • Riapre domani 09:00');
-  } else if (dayOfWeek === 2) { // Martedì
-    isOpen = (currentTime >= 9.0 && currentTime < 12.5) || (currentTime >= 13.0 && currentTime < 20.0);
-    statusDetail = isOpen ? (currentTime < 12.5 ? 'Aperto fino alle 12:30 (riapre 13:00)' : 'Aperto stasera fino alle 20:00') : (currentTime < 9.0 ? 'Apre oggi alle 09:00' : 'Chiuso • Riapre domani 09:00');
-  } else if (dayOfWeek >= 3 && dayOfWeek <= 5) { // Mercoledì, Giovedì, Venerdì
-    isOpen = (currentTime >= 9.0 && currentTime < 12.5) || (currentTime >= 13.5 && currentTime < 21.0);
-    statusDetail = isOpen ? (currentTime < 12.5 ? 'Aperto fino alle 12:30 (riapre 13:30)' : 'Aperto stasera fino alle 21:00') : (currentTime < 9.0 ? 'Apre oggi alle 09:00' : 'Chiuso • Riapre alle 09:00');
-  } else if (dayOfWeek === 6) { // Sabato
-    isOpen = (currentTime >= 8.0 && currentTime < 13.5);
-    statusDetail = isOpen ? 'Aperto fino alle 13:30' : 'Chiuso • Riapre lunedì 13:30';
-  } else { // Domenica
-    isOpen = false;
-    statusDetail = 'Domenica Chiuso • Riapre lunedì 13:30';
+  if (isOpen) {
+    const nextSlot = todaySlots.find(([open]) => open >= currentSlot[1]);
+    statusDetail = `Aperto fino alle ${fmt(currentSlot[1])}` + (nextSlot ? ` (riapre ${fmt(nextSlot[0])})` : '');
+  } else {
+    const laterToday = todaySlots.find(([open]) => open > currentTime);
+    if (laterToday) {
+      statusDetail = `Apre oggi alle ${fmt(laterToday[0])}`;
+    } else {
+      for (let i = 1; i <= 7; i++) {
+        const d = (dayOfWeek + i) % 7;
+        if (SCHEDULE[d].length) {
+          const when = i === 1 ? 'domani' : DAY_NAMES[d];
+          statusDetail = `Chiuso • Riapre ${when} alle ${fmt(SCHEDULE[d][0][0])}`;
+          break;
+        }
+      }
+    }
   }
 
   if (statusPill) {

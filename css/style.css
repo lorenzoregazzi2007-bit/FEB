@@ -1608,6 +1608,56 @@ h1, h2, h3, h4 {
   filter: grayscale(100%) invert(92%) contrast(85%);
 }
 
+.map-consent {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 16px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: center;
+  color: #ffffff;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 27px, #161616 27px 28px),
+    repeating-linear-gradient(90deg, transparent 0 27px, #161616 27px 28px),
+    #070707;
+  transition: background-color 0.2s;
+}
+
+.map-consent:hover svg {
+  transform: translateY(-2px);
+}
+
+.map-consent svg {
+  margin-bottom: 4px;
+  transition: transform 0.2s;
+}
+
+.map-consent-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 8px 16px;
+  background: #000000;
+}
+
+.map-consent:hover .map-consent-title {
+  border-color: #ffffff;
+}
+
+.map-consent-note {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
 .address-details {
   display: flex;
   justify-content: space-between;
