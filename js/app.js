@@ -39,12 +39,12 @@ function initIntroScreen() {
   // Cliccare ovunque sull'intro per entrare subito
   intro.addEventListener('click', dismissIntro);
 
-  // Apertura automatica dopo 1.8 secondi (tempo di 2 tagli della forbice)
+  // Apertura automatica dopo che la forbice ha tagliato il logo
   setTimeout(() => {
     if (!intro.classList.contains('hide')) {
       dismissIntro();
     }
-  }, 1900);
+  }, 2500);
 }
 
 /* ============================================================

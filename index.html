@@ -6,7 +6,10 @@
   
   <title>BARBER FEB | Minerbio (BO) - Mattia Fabbri</title>
   <meta name="description" content="Barber FEB a Minerbio (Bologna) di Mattia Fabbri. Sfumature Skin Fade a pelle, cura della barba con panno caldo e lametta. Prenotazioni su Take Care.">
-  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#000000">
   
   <!-- Font Minimal Editorial: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,7 +28,11 @@
     <div class="intro-curtain intro-curtain-right"></div>
     <div class="intro-content">
       <div class="scissor-animation-box">
-        <svg class="scissor-svg" viewBox="0 0 100 100" width="100" height="100" fill="none">
+        <!-- Logo tagliato in due dalla forbice -->
+        <img src="assets/logo-white.png" alt="" class="intro-logo-half intro-logo-top" aria-hidden="true">
+        <img src="assets/logo-white.png" alt="Barber FEB" class="intro-logo-half intro-logo-bottom">
+        <div class="cut-laser-line"></div>
+        <svg class="scissor-svg" viewBox="0 0 100 100" width="64" height="64" fill="none" aria-hidden="true">
           <!-- Lama Superiore -->
           <g class="blade blade-upper">
             <path d="M 22 72 C 16 72 12 66 12 58 C 12 50 18 45 25 48 L 52 54 L 88 32 C 91 30 93 34 91 37 L 54 62 L 34 68 C 30 70 26 72 22 72 Z" fill="#ffffff"/>
@@ -39,7 +46,6 @@
           <!-- Vite Perno -->
           <circle cx="53" cy="50" r="3.5" fill="#ffffff" stroke="#000000" stroke-width="1.5"/>
         </svg>
-        <div class="cut-laser-line"></div>
       </div>
       <div class="intro-brand-name">BARBER FEB</div>
       <div class="intro-brand-sub">MINERBIO • BOLOGNA</div>
@@ -54,7 +60,7 @@
     <div class="container header-container">
       <div class="header-inner">
         <a href="#chi-siamo" class="brand" aria-label="Home Barber FEB">
-          <img src="assets/logo.svg" alt="B" class="brand-monogram">
+          <img src="assets/logo-white.png" alt="Logo Barber FEB" class="brand-monogram">
           <span class="brand-name">BARBER FEB</span>
         </a>
 
@@ -159,7 +165,7 @@
         <!-- Card Teaser Compatta (Ottimizzata per Smartphone) -->
         <div class="barber-compact-card panel-trigger" id="barber-card-trigger" data-panel-id="mattia">
           <div class="barber-compact-thumb-wrap">
-            <img src="assets/barber-mattia.jpg" alt="Mattia Fabbri - Barber FEB" class="barber-compact-thumb">
+            <img src="assets/barber-mattia-thumb.jpg" alt="Mattia Fabbri - Barber FEB" class="barber-compact-thumb">
           </div>
           
           <div class="barber-compact-info">
@@ -656,9 +662,12 @@
   <footer class="site-footer">
     <div class="container">
       <div class="footer-row">
-        <div>
-          <div class="footer-brand">BARBER FEB</div>
-          <div class="footer-sub">Minerbio (BO) • Mattia Fabbri</div>
+        <div class="footer-brand-wrap">
+          <img src="assets/logo-white.png" alt="Logo Barber FEB" class="footer-logo" loading="lazy">
+          <div>
+            <div class="footer-brand">BARBER FEB</div>
+            <div class="footer-sub">Minerbio (BO) • Mattia Fabbri</div>
+          </div>
         </div>
         <div class="footer-links">
           <a href="https://takecare.app" target="_blank" rel="noopener noreferrer">Take Care</a>
