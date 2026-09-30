@@ -36,33 +36,62 @@ function initMapConsent() {
 ============================================================ */
 function initIntroScreen() {
   const intro = document.getElementById('intro-screen');
-  const skipBtn = document.getElementById('intro-skip-btn');
   if (!intro) return;
 
-  const dismissIntro = () => {
-    intro.classList.add('opening');
-    setTimeout(() => {
-      intro.classList.add('hide');
-    }, 450);
-  };
-
-  // Se l'utente clicca sul pulsante Salta / Entra
-  if (skipBtn) {
-    skipBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      dismissIntro();
-    });
+  // Già vista (o movimento ridotto): via subito
+  if (document.documentElement.classList.contains('intro-skip')) {
+    intro.remove();
+    return;
   }
 
-  // Cliccare ovunque sull'intro per entrare subito
-  intro.addEventListener('click', dismissIntro);
+  // La metà B è una copia della scena, tagliata sotto la diagonale
+  const scene = intro.querySelector('.intro-half-a .intro-scene');
+  const halfB = intro.querySelector('.intro-half-b');
+  if (scene && halfB) {
+    const copy = scene.cloneNode(true);
+    copy.querySelectorAll('img').forEach(img => { img.alt = ''; });
+    halfB.appendChild(copy);
+  }
 
-  // Apertura automatica dopo che la forbice ha tagliato il logo
-  setTimeout(() => {
-    if (!intro.classList.contains('hide')) {
-      dismissIntro();
-    }
-  }, 2500);
+  // Il colpo di lametta segue la diagonale 72% → 48% dello schermo (centro al 60%)
+  const setSlashGeometry = () => {
+    const w = window.innerWidth;
+    const rise = window.innerHeight * 0.24;
+    intro.style.setProperty('--slash-angle', `${Math.atan2(-rise, w) * 180 / Math.PI}deg`);
+    intro.style.setProperty('--slash-len', `${Math.hypot(w, rise) + 40}px`);
+  };
+  setSlashGeometry();
+  window.addEventListener('resize', setSlashGeometry);
+
+  document.body.style.overflow = 'hidden';
+  let autoTimer = null;
+  let cutStarted = false;
+
+  const finish = () => {
+    intro.classList.add('hide');
+    document.body.style.overflow = '';
+    window.removeEventListener('resize', setSlashGeometry);
+    try { localStorage.setItem('feb-intro-seen', '1'); } catch (e) {}
+    setTimeout(() => intro.remove(), 400);
+  };
+
+  const cut = () => {
+    if (cutStarted) return;
+    cutStarted = true;
+    clearTimeout(autoTimer);
+    intro.classList.add('cutting');
+    setTimeout(() => intro.classList.add('split'), 260);
+    setTimeout(finish, 1000);
+  };
+
+  // Tocco, click, Invio o Esc: taglio immediato
+  intro.addEventListener('click', cut);
+  document.addEventListener('keydown', (e) => {
+    if (['Enter', 'Escape', ' '].includes(e.key)) cut();
+  });
+
+  // Sequenza automatica: neon (0–1.3s), zoom (0.55–2.1s), taglio a 2s
+  autoTimer = setTimeout(cut, 2000);
 }
 
 /* ============================================================

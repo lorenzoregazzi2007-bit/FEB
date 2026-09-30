@@ -181,211 +181,236 @@ h1, h2, h3, h4 {
 }
 
 /* ------------------------------------------------------------
-   INTRO SCREEN (FORBICE CHE TAGLIA E APRE IL SITO)
+   INTRO SCREEN: LA VETRINA SI ACCENDE, ZOOM SULLA PORTA,
+   COLPO DI LAMETTA CHE TAGLIA LA SCENA E APRE IL SITO
 ------------------------------------------------------------ */
 .intro-screen {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: #000000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
-  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.65s;
+  cursor: pointer;
+  --slash-angle: -14deg;
+  --slash-len: 150vmax;
+}
+
+/* Visite successive o "riduci movimento": niente intro */
+html.intro-skip .intro-screen {
+  display: none;
 }
 
 .intro-screen.hide {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s;
 }
 
-.intro-curtain {
+/* Le due metà della scena, separate lungo la diagonale del taglio
+   (da 72% a sinistra a 48% a destra, centro al 60%) */
+.intro-half {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 50%;
+  inset: 0;
   background: #000000;
-  z-index: 1;
-  transition: transform 0.7s cubic-bezier(0.8, 0, 0.2, 1);
+  overflow: hidden;
+  will-change: transform;
+  transition: transform 0.75s cubic-bezier(0.7, 0, 0.25, 1);
 }
 
-.intro-curtain-left {
-  left: 0;
+.intro-half-a {
+  clip-path: polygon(0 0, 100% 0, 100% 48.3%, 0 72.3%);
 }
 
-.intro-curtain-right {
-  right: 0;
+.intro-half-b {
+  clip-path: polygon(0 71.7%, 100% 47.7%, 100% 100%, 0 100%);
 }
 
-.intro-screen.opening .intro-curtain-left {
-  transform: translateX(-100%);
+.intro-screen.split .intro-half-a {
+  transform: translate(-8vw, -75vh) rotate(-4deg);
 }
 
-.intro-screen.opening .intro-curtain-right {
-  transform: translateX(100%);
+.intro-screen.split .intro-half-b {
+  transform: translate(8vw, 75vh) rotate(3deg);
 }
 
-.intro-content {
-  position: relative;
-  z-index: 2;
+/* Scena: foto della vetrina di sera con zoom verso la porta */
+.intro-scene {
+  position: absolute;
+  inset: 0;
+  transform-origin: 53% 60%;
+  animation: intro-zoom 1.6s cubic-bezier(0.5, 0, 0.3, 1) 0.55s forwards;
+}
+
+.intro-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 53% 60%;
+}
+
+.intro-vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 42%),
+    radial-gradient(ellipse at 53% 50%, rgba(0, 0, 0, 0) 38%, rgba(0, 0, 0, 0.7) 100%);
+}
+
+/* Buio che tremola come un neon che si accende */
+.intro-dark {
+  position: absolute;
+  inset: 0;
+  background: #000000;
+  animation: neon-flicker 1.1s linear 0.15s forwards;
+}
+
+/* Logo al centro: la lametta lo taglia insieme alla vetrina */
+.intro-brand {
+  position: absolute;
+  left: 50%;
+  top: 60%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  padding: 20px;
-}
-
-/* Logo BF (458x331) tagliato a metÃ  dalla forbice */
-.scissor-animation-box {
-  position: relative;
-  width: 180px;
-  height: 130px;
-  margin-bottom: 30px;
-}
-
-.intro-logo-half {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+  gap: 12px;
+  padding: 48px 56px;
+  background: radial-gradient(closest-side, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0));
   opacity: 0;
-  animation: intro-logo-in 0.45s ease forwards;
+  transform: translate(-50%, calc(-50% + 12px));
+  animation: intro-brand-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) 1.05s forwards;
 }
 
-.intro-logo-top {
-  clip-path: inset(0 0 50% 0);
-  animation: intro-logo-in 0.45s ease forwards,
-             split-top 0.5s cubic-bezier(0.16, 1, 0.3, 1) 1.4s forwards;
-}
-
-.intro-logo-bottom {
-  clip-path: inset(50% 0 0 0);
-  animation: intro-logo-in 0.45s ease forwards,
-             split-bottom 0.5s cubic-bezier(0.16, 1, 0.3, 1) 1.4s forwards;
-}
-
-@keyframes intro-logo-in {
-  from { opacity: 0; transform: scale(0.94); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-@keyframes split-top {
-  from { opacity: 1; transform: translate(0, 0) rotate(0); }
-  to { opacity: 1; transform: translate(-4px, -7px) rotate(-2deg); }
-}
-
-@keyframes split-bottom {
-  from { opacity: 1; transform: translate(0, 0) rotate(0); }
-  to { opacity: 1; transform: translate(4px, 7px) rotate(1.2deg); }
-}
-
-/* La forbice attraversa il logo da sinistra a destra */
-.scissor-svg {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  margin-top: -32px;
-  z-index: 2;
-  opacity: 0;
-  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.45)) drop-shadow(0 0 2px #000000);
-  animation: scissor-travel 1.1s cubic-bezier(0.45, 0, 0.55, 1) 0.35s forwards;
-}
-
-@keyframes scissor-travel {
-  0% { opacity: 0; transform: translateX(-90px); }
-  12% { opacity: 1; }
-  88% { opacity: 1; }
-  100% { opacity: 0; transform: translateX(210px); }
-}
-
-.blade-upper {
-  transform-origin: 53px 50px;
-  animation: snip-upper 0.28s ease-in-out infinite;
-}
-
-.blade-lower {
-  transform-origin: 53px 50px;
-  animation: snip-lower 0.28s ease-in-out infinite;
-}
-
-@keyframes snip-upper {
-  0%, 100% { transform: rotate(-16deg); }
-  50% { transform: rotate(3deg); }
-}
-
-@keyframes snip-lower {
-  0%, 100% { transform: rotate(16deg); }
-  50% { transform: rotate(-3deg); }
-}
-
-/* Linea di taglio che segue la forbice */
-.cut-laser-line {
-  position: absolute;
-  top: 50%;
-  left: -30px;
-  right: -30px;
-  height: 1.5px;
-  margin-top: -0.75px;
-  z-index: 1;
-  background: linear-gradient(90deg, transparent, #ffffff 15%, #ffffff 85%, transparent);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-  transform: scaleX(0);
-  transform-origin: left center;
-  animation: cut-draw 1.1s cubic-bezier(0.45, 0, 0.55, 1) 0.35s forwards,
-             cut-fade 0.4s ease 1.5s forwards;
-}
-
-@keyframes cut-draw {
-  to { transform: scaleX(1); }
-}
-
-@keyframes cut-fade {
-  to { opacity: 0; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .intro-logo-half,
-  .scissor-svg,
-  .cut-laser-line,
-  .blade-upper,
-  .blade-lower {
-    animation: none;
-  }
-  .intro-logo-half { opacity: 1; }
-  .scissor-svg,
-  .cut-laser-line { display: none; }
-}
-
-.intro-brand-name {
-  font-size: 1.6rem;
-  font-weight: 800;
-  letter-spacing: 0.28em;
-  color: #ffffff;
-  margin-bottom: 6px;
-  animation: intro-fade-text 1.2s ease forwards;
+.intro-logo {
+  width: clamp(110px, 28vw, 170px);
+  height: auto;
+  filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.35));
 }
 
 .intro-brand-sub {
-  font-size: 0.72rem;
-  letter-spacing: 0.25em;
-  color: var(--text-secondary);
-  margin-bottom: 24px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  color: rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
+}
+
+@keyframes intro-zoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.28); }
+}
+
+@keyframes neon-flicker {
+  0% { opacity: 1; }
+  8% { opacity: 0.4; }
+  10% { opacity: 1; }
+  19% { opacity: 1; }
+  21% { opacity: 0.2; }
+  24% { opacity: 0.85; }
+  31% { opacity: 0.12; }
+  36% { opacity: 0.6; }
+  46% { opacity: 0.05; }
+  52% { opacity: 0.35; }
+  62%, 100% { opacity: 0; }
+}
+
+@keyframes intro-brand-in {
+  to { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+/* Colpo di lametta lungo la diagonale */
+.intro-slash {
+  position: absolute;
+  left: 50%;
+  top: 60%;
+  width: var(--slash-len);
+  height: 0;
+  z-index: 3;
+  pointer-events: none;
+  transform: translate(-50%, -50%) rotate(var(--slash-angle));
+  transition: opacity 0.3s ease;
+}
+
+.intro-slash-line {
+  position: absolute;
+  left: 0;
+  top: -1px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), #ffffff 18%, #ffffff);
+  box-shadow: 0 0 10px #ffffff, 0 0 28px rgba(255, 255, 255, 0.6);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+.intro-razor {
+  position: absolute;
+  top: -18px;
+  left: -100px;
+  opacity: 0;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+}
+
+.intro-screen.cutting .intro-slash-line {
+  animation: slash-draw 0.28s cubic-bezier(0.6, 0, 0.3, 1) forwards;
+}
+
+.intro-screen.cutting .intro-razor {
+  animation: razor-run 0.28s cubic-bezier(0.6, 0, 0.3, 1) forwards;
+}
+
+.intro-screen.split .intro-slash {
+  opacity: 0;
+}
+
+/* Lampo bianco nel momento del taglio */
+.intro-screen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background: #ffffff;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.intro-screen.cutting::after {
+  animation: slash-flash 0.4s ease 0.2s;
+}
+
+@keyframes slash-draw {
+  to { transform: scaleX(1); }
+}
+
+@keyframes razor-run {
+  0% { left: -100px; opacity: 1; }
+  85% { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+
+@keyframes slash-flash {
+  0% { opacity: 0; }
+  30% { opacity: 0.3; }
+  100% { opacity: 0; }
 }
 
 .intro-skip-btn {
-  background: transparent;
-  border: 1px solid #333333;
-  color: #888888;
-  font-size: 0.72rem;
+  position: absolute;
+  right: 18px;
+  top: 18px;
+  z-index: 5;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.8);
+  font-family: inherit;
+  font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.16em;
-  padding: 6px 14px;
+  padding: 7px 14px;
   border-radius: var(--radius-full);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: border-color 0.2s, color 0.2s, opacity 0.2s;
 }
 
 .intro-skip-btn:hover {
@@ -393,9 +418,8 @@ h1, h2, h3, h4 {
   color: #ffffff;
 }
 
-@keyframes intro-fade-text {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+.intro-screen.cutting .intro-skip-btn {
+  opacity: 0;
 }
 
 /* ------------------------------------------------------------

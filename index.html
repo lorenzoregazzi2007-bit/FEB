@@ -88,42 +88,47 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="css/style.css">
+  <script>
+    try {
+      if (localStorage.getItem('feb-intro-seen') || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('intro-skip');
+      }
+    } catch (e) {}
+  </script>
 </head>
 <body>
 
   <!-- ============================================================
        INTRO DEL SITO (Animazione Forbice & Taglio)
   ============================================================ -->
-  <div class="intro-screen" id="intro-screen">
-    <div class="intro-curtain intro-curtain-left"></div>
-    <div class="intro-curtain intro-curtain-right"></div>
-    <div class="intro-content">
-      <div class="scissor-animation-box">
-        <!-- Logo tagliato in due dalla forbice -->
-        <img src="assets/logo-white.png" alt="" class="intro-logo-half intro-logo-top" aria-hidden="true">
-        <img src="assets/logo-white.png" alt="Barber FEB" class="intro-logo-half intro-logo-bottom">
-        <div class="cut-laser-line"></div>
-        <svg class="scissor-svg" viewBox="0 0 100 100" width="64" height="64" fill="none" aria-hidden="true">
-          <!-- Lama Superiore -->
-          <g class="blade blade-upper">
-            <path d="M 22 72 C 16 72 12 66 12 58 C 12 50 18 45 25 48 L 52 54 L 88 32 C 91 30 93 34 91 37 L 54 62 L 34 68 C 30 70 26 72 22 72 Z" fill="#ffffff"/>
-            <circle cx="20" cy="58" r="6" fill="#000000" stroke="#ffffff" stroke-width="2.5"/>
-          </g>
-          <!-- Lama Inferiore -->
-          <g class="blade blade-lower">
-            <path d="M 22 28 C 16 28 12 34 12 42 C 12 50 18 55 25 52 L 52 46 L 88 68 C 91 70 93 66 91 63 L 54 38 L 34 32 C 30 30 26 28 22 28 Z" fill="#ffffff"/>
-            <circle cx="20" cy="42" r="6" fill="#000000" stroke="#ffffff" stroke-width="2.5"/>
-          </g>
-          <!-- Vite Perno -->
-          <circle cx="53" cy="50" r="3.5" fill="#ffffff" stroke="#000000" stroke-width="1.5"/>
-        </svg>
+  <div class="intro-screen" id="intro-screen" aria-label="Intro Barber FEB">
+    <!-- Metà A (sopra il taglio): la scena viene clonata via JS nella metà B -->
+    <div class="intro-half intro-half-a">
+      <div class="intro-scene">
+        <img src="assets/intro-vetrina.jpg" alt="" class="intro-photo" fetchpriority="high">
+        <div class="intro-vignette"></div>
+        <div class="intro-dark"></div>
+        <div class="intro-brand">
+          <img src="assets/logo-white.png" alt="Barber FEB" class="intro-logo">
+          <span class="intro-brand-sub">MINERBIO • VIA CANALETTO 1</span>
+        </div>
       </div>
-      <div class="intro-brand-name">BARBER FEB</div>
-      <div class="intro-brand-sub">MINERBIO • BOLOGNA</div>
-      <button class="intro-skip-btn" id="intro-skip-btn">ENTRA ➔</button>
     </div>
-  </div>
+    <div class="intro-half intro-half-b" aria-hidden="true"></div>
 
+    <!-- Colpo di lametta -->
+    <div class="intro-slash" aria-hidden="true">
+      <span class="intro-slash-line"></span>
+      <svg class="intro-razor" viewBox="0 0 120 40" width="96" height="32" fill="none">
+        <path d="M4 22 L70 10 C76 9 80 12 80 16 L80 22 C80 26 76 28 70 27 Z" fill="#ffffff"/>
+        <path d="M4 22 L70 12" stroke="#000000" stroke-width="1" opacity="0.35"/>
+        <rect x="80" y="14" width="36" height="9" rx="4.5" fill="#1a1a1a" stroke="#ffffff" stroke-width="1.5"/>
+        <circle cx="84" cy="18.5" r="2" fill="#ffffff"/>
+      </svg>
+    </div>
+
+    <button class="intro-skip-btn" id="intro-skip-btn">ENTRA ➔</button>
+  </div>
   <!-- ============================================================
        HEADER
   ============================================================ -->
