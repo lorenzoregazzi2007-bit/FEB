@@ -174,9 +174,9 @@
       <div class="container">
         <!-- Hero Frame con Slideshow Automatico -->
         <div class="salon-hero-frame" id="hero-slideshow">
-          <!-- Slide 1: Vetrina di sera con insegna -->
+          <!-- Slide 1: Mattia al lavoro in salone (resta sempre la prima) -->
           <div class="hero-slide active" data-index="0">
-            <img src="assets/salone-sera.jpg" alt="Vetrina Barber FEB di sera a Minerbio" class="salon-hero-img" loading="eager">
+            <img src="assets/salone-mattia.jpg" alt="Mattia Fabbri al lavoro nel salone Barber FEB" class="salon-hero-img" loading="eager">
           </div>
           <!-- Slide 2: Interno con poltrone e specchi -->
           <div class="hero-slide" data-index="1">
@@ -285,78 +285,167 @@
           </div>
 
           <div class="folder-scroll-track" tabindex="0" aria-label="Cartella Skin Fade">
-            <!-- Riquadro 1: Mullet -->
-            <div class="photo-card" onclick="openPhotoModal('Mullet', 'Skin Fade', 'assets/tagli/mullet.jpg', 'Sfumatura a pelle sui lati e texture naturale superiore')">
+            <!-- Riquadro 1: Crop Fade -->
+            <div class="photo-card" onclick="openPhotoModal('Crop Fade', 'Skin Fade', 'assets/tagli/crop-fade.jpg', 'Sfumatura a pelle alta con top corto e linea frontale netta')">
               <div class="photo-card-img-wrap">
-                <img src="assets/tagli/mullet.jpg" alt="Mullet Skin Fade" loading="lazy">
+                <img src="assets/tagli/crop-fade.jpg" alt="Crop Fade - Barber FEB Minerbio" loading="lazy">
               </div>
               <div class="photo-card-info">
                 <span class="photo-card-cat">SKIN FADE</span>
-                <h4 class="photo-card-name">Mullet</h4>
-                <p class="photo-card-detail">Sfumatura a pelle &amp; texture</p>
+                <h4 class="photo-card-name">Crop Fade</h4>
+                <p class="photo-card-detail">Skin fade alta e top corto</p>
               </div>
             </div>
 
-            <!-- Riquadro 2: Taper Fade -->
-            <div class="photo-card" onclick="openPhotoModal('Low Taper Fade', 'Skin Fade', 'assets/tagli/taper.jpg', 'Tempie e nuca sfumati con precisione a rasoio')">
+            <!-- Riquadro 2: Mid Fade -->
+            <div class="photo-card" onclick="openPhotoModal('Mid Fade', 'Skin Fade', 'assets/tagli/mid-fade.jpg', 'Sfumatura media pulita con volume naturale sopra, perfetta anche sui capelli brizzolati')">
               <div class="photo-card-img-wrap">
-                <img src="assets/tagli/taper.jpg" alt="Low Taper Fade" loading="lazy">
+                <img src="assets/tagli/mid-fade.jpg" alt="Mid Fade - Barber FEB Minerbio" loading="lazy">
               </div>
               <div class="photo-card-info">
                 <span class="photo-card-cat">SKIN FADE</span>
-                <h4 class="photo-card-name">Taper Fade</h4>
-                <p class="photo-card-detail">Tempie e cono collo sfumati</p>
+                <h4 class="photo-card-name">Mid Fade</h4>
+                <p class="photo-card-detail">Sfumatura media e top mosso</p>
               </div>
             </div>
 
-            <!-- Riquadro 3: Sfumatura Bassa -->
-            <div class="photo-card" onclick="openPhotoModal('Sfumatura Bassa', 'Skin Fade', 'assets/tagli/low-fade.jpg', 'Low fade pulita e sagomata con pettine e macchinetta')">
+            <!-- Riquadro 3: Low Taper -->
+            <div class="photo-card" onclick="openPhotoModal('Low Taper', 'Skin Fade', 'assets/tagli/low-taper.jpg', 'Taper basso attorno all\'orecchio con frangia texturizzata')">
               <div class="photo-card-img-wrap">
-                <img src="assets/tagli/low-fade.jpg" alt="Sfumatura Bassa" loading="lazy">
+                <img src="assets/tagli/low-taper.jpg" alt="Low Taper - Barber FEB Minerbio" loading="lazy">
               </div>
               <div class="photo-card-info">
                 <span class="photo-card-cat">SKIN FADE</span>
-                <h4 class="photo-card-name">Sfumatura Bassa</h4>
-                <p class="photo-card-detail">Low skin fade millimetrica</p>
+                <h4 class="photo-card-name">Low Taper</h4>
+                <p class="photo-card-detail">Taper basso con frangia</p>
               </div>
             </div>
 
-            <!-- Riquadro 4: Mullet Texture -->
-            <div class="photo-card" onclick="openPhotoModal('Mullet Texture', 'Skin Fade', 'assets/tagli/taper-ciuffo.jpg', 'Sfumatura laterale pulita con ciuffo e nuca lavorati a texture')">
+            <!-- Riquadro 4: Taper & Frangia -->
+            <div class="photo-card" onclick="openPhotoModal('Taper & Frangia', 'Skin Fade', 'assets/tagli/taper-frangia.jpg', 'Lati sfumati e ciuffo lungo portato in avanti di lato')">
               <div class="photo-card-img-wrap">
-                <img src="assets/tagli/taper-ciuffo.jpg" alt="Mullet Texture" loading="lazy">
+                <img src="assets/tagli/taper-frangia.jpg" alt="Taper &amp; Frangia - Barber FEB Minerbio" loading="lazy">
               </div>
               <div class="photo-card-info">
                 <span class="photo-card-cat">SKIN FADE</span>
-                <h4 class="photo-card-name">Mullet Texture</h4>
-                <p class="photo-card-detail">Sfumatura laterale &amp; ciuffo mosso</p>
+                <h4 class="photo-card-name">Taper &amp; Frangia</h4>
+                <p class="photo-card-detail">Lati sfumati e ciuffo laterale</p>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- CARTELLA 2: TAGLIO CLASSICO -->
+        <!-- CARTELLA 2: RICCI -->
         <div class="folder-group">
           <div class="folder-header">
             <div class="folder-title-wrap">
               <span class="folder-num">02</span>
               <div>
-                <h3 class="folder-title">Taglio Classico</h3>
-                <span class="folder-subtitle">Tradizione artigianale a pettine e forbici</span>
+                <h3 class="folder-title">Ricci</h3>
+                <span class="folder-subtitle">Fade e texture pensati per capelli ricci e mossi</span>
+              </div>
+            </div>
+            <span class="scroll-hint">Scorri ➔</span>
+          </div>
+
+          <div class="folder-scroll-track" tabindex="0" aria-label="Cartella Ricci">
+            <!-- Riquadro 1: Burst Fade Riccio -->
+            <div class="photo-card" onclick="openPhotoModal('Burst Fade Riccio', 'Ricci', 'assets/tagli/burst-fade-riccio.jpg', 'Burst fade che gira attorno all\'orecchio e lascia i ricci pieni sopra')">
+              <div class="photo-card-img-wrap">
+                <img src="assets/tagli/burst-fade-riccio.jpg" alt="Burst Fade Riccio - Barber FEB Minerbio" loading="lazy">
+              </div>
+              <div class="photo-card-info">
+                <span class="photo-card-cat">RICCI</span>
+                <h4 class="photo-card-name">Burst Fade Riccio</h4>
+                <p class="photo-card-detail">Sfumatura attorno all'orecchio</p>
+              </div>
+            </div>
+
+            <!-- Riquadro 2: Mullet Riccio -->
+            <div class="photo-card" onclick="openPhotoModal('Mullet Riccio', 'Ricci', 'assets/tagli/mullet-riccio.jpg', 'Mullet con ricci lunghi sulla nuca e lati sfumati a pelle')">
+              <div class="photo-card-img-wrap">
+                <img src="assets/tagli/mullet-riccio.jpg" alt="Mullet Riccio - Barber FEB Minerbio" loading="lazy">
+              </div>
+              <div class="photo-card-info">
+                <span class="photo-card-cat">RICCI</span>
+                <h4 class="photo-card-name">Mullet Riccio</h4>
+                <p class="photo-card-detail">Nuca lunga e lati sfumati</p>
+              </div>
+            </div>
+
+            <!-- Riquadro 3: Ricci & Barba -->
+            <div class="photo-card" onclick="openPhotoModal('Ricci & Barba', 'Ricci', 'assets/tagli/ricci-barba.jpg', 'Low fade sui lati, ricci definiti e barba sagomata in continuità')">
+              <div class="photo-card-img-wrap">
+                <img src="assets/tagli/ricci-barba.jpg" alt="Ricci &amp; Barba - Barber FEB Minerbio" loading="lazy">
+              </div>
+              <div class="photo-card-info">
+                <span class="photo-card-cat">RICCI</span>
+                <h4 class="photo-card-name">Ricci &amp; Barba</h4>
+                <p class="photo-card-detail">Low fade, ricci e barba sagomata</p>
+              </div>
+            </div>
+
+            <!-- Riquadro 4: Ricci con Frangia -->
+            <div class="photo-card" onclick="openPhotoModal('Ricci con Frangia', 'Ricci', 'assets/tagli/ricci-frangia.jpg', 'Taper basso e ricci naturali portati in avanti sulla fronte')">
+              <div class="photo-card-img-wrap">
+                <img src="assets/tagli/ricci-frangia.jpg" alt="Ricci con Frangia - Barber FEB Minerbio" loading="lazy">
+              </div>
+              <div class="photo-card-info">
+                <span class="photo-card-cat">RICCI</span>
+                <h4 class="photo-card-name">Ricci con Frangia</h4>
+                <p class="photo-card-detail">Taper basso e ricci naturali</p>
               </div>
             </div>
           </div>
+        </div>
+
+        <!-- CARTELLA 3: TAGLIO CLASSICO -->
+        <div class="folder-group">
+          <div class="folder-header">
+            <div class="folder-title-wrap">
+              <span class="folder-num">03</span>
+              <div>
+                <h3 class="folder-title">Taglio Classico</h3>
+                <span class="folder-subtitle">Pettinati, lunghezze e tradizione a forbice</span>
+              </div>
+            </div>
+            <span class="scroll-hint">Scorri ➔</span>
+          </div>
 
           <div class="folder-scroll-track" tabindex="0" aria-label="Cartella Taglio Classico">
-            <!-- Riquadro 1: Mosso Naturale -->
-            <div class="photo-card" onclick="openPhotoModal('Mosso Naturale', 'Taglio Classico', 'assets/tagli/mosso-naturale.jpg', 'Volume mosso lavorato a forbice, con lati puliti e movimento naturale')">
+            <!-- Riquadro 1: Flow Pettinato -->
+            <div class="photo-card" onclick="openPhotoModal('Flow Pettinato', 'Taglio Classico', 'assets/tagli/flow-pettinato.jpg', 'Lunghezze lavorate a forbice, pettinate all\'indietro con nuca sfumata')">
               <div class="photo-card-img-wrap">
-                <img src="assets/tagli/mosso-naturale.jpg" alt="Taglio Mosso Naturale" loading="lazy">
+                <img src="assets/tagli/flow-pettinato.jpg" alt="Flow Pettinato - Barber FEB Minerbio" loading="lazy">
               </div>
               <div class="photo-card-info">
                 <span class="photo-card-cat">TAGLIO CLASSICO</span>
-                <h4 class="photo-card-name">Mosso Naturale</h4>
-                <p class="photo-card-detail">Volume a forbice e lati puliti</p>
+                <h4 class="photo-card-name">Flow Pettinato</h4>
+                <p class="photo-card-detail">Lunghezze all'indietro e taper</p>
+              </div>
+            </div>
+
+            <!-- Riquadro 2: Slick Back -->
+            <div class="photo-card" onclick="openPhotoModal('Slick Back', 'Taglio Classico', 'assets/tagli/slick-back.jpg', 'Slick back con lunghezze sopra e lati puliti a taper')">
+              <div class="photo-card-img-wrap">
+                <img src="assets/tagli/slick-back.jpg" alt="Slick Back - Barber FEB Minerbio" loading="lazy">
+              </div>
+              <div class="photo-card-info">
+                <span class="photo-card-cat">TAGLIO CLASSICO</span>
+                <h4 class="photo-card-name">Slick Back</h4>
+                <p class="photo-card-detail">Pettinato all'indietro</p>
+              </div>
+            </div>
+
+            <!-- Riquadro 3: Pettinato Taper -->
+            <div class="photo-card" onclick="openPhotoModal('Pettinato Taper', 'Taglio Classico', 'assets/tagli/pettinato-taper.jpg', 'Ciuffo pettinato di lato con taper morbido sulla nuca')">
+              <div class="photo-card-img-wrap">
+                <img src="assets/tagli/pettinato-taper.jpg" alt="Pettinato Taper - Barber FEB Minerbio" loading="lazy">
+              </div>
+              <div class="photo-card-info">
+                <span class="photo-card-cat">TAGLIO CLASSICO</span>
+                <h4 class="photo-card-name">Pettinato Taper</h4>
+                <p class="photo-card-detail">Ciuffo pettinato e nuca sfumata</p>
               </div>
             </div>
           </div>

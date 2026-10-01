@@ -177,6 +177,7 @@ function initIntroScreen() {
 
   const finish = () => {
     intro.classList.add('hide');
+    document.dispatchEvent(new Event('intro:done'));
     document.body.style.overflow = '';
     window.removeEventListener('resize', onResize);
     try { localStorage.setItem('feb-intro-seen', '1'); } catch (e) {}
@@ -290,7 +291,15 @@ function initHeroSlideshow() {
     }, { passive: true });
   }
 
-  startTimer();
+  // Lo slideshow parte solo dopo l'intro, così la prima foto che si vede è sempre la prima
+  if (document.getElementById('intro-screen')) {
+    document.addEventListener('intro:done', () => {
+      showSlide(0);
+      startTimer();
+    }, { once: true });
+  } else {
+    startTimer();
+  }
 }
 
 /* ============================================================
