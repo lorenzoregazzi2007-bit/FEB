@@ -40,8 +40,101 @@ function initMapConsent() {
 const LOGO_SIZE = { w: 458, h: 331 };
 const LOGO_PARTS = {
   b: { x: 4, y: 4, w: 222 },
-  f: { x: 226, y: 5, w: 228 }
+  f: { x: 240, y: 5, w: 214 }
 };
+
+// Fasci di luce verticali che esplodono dietro al logo (come la sigla Netflix)
+function burstIntroRays(container) {
+  if (!container) return;
+  const spread = Math.min(window.innerWidth * 0.55, 420);
+  for (let i = 0; i < 26; i++) {
+    const ray = document.createElement('span');
+    ray.className = 'nf-ray';
+    const width = 1 + Math.random() * (Math.random() < 0.25 ? 14 : 4);
+    const start = (Math.random() - 0.5) * 40;
+    const end = (Math.random() - 0.5) * spread * 2;
+    ray.style.width = `${width}px`;
+    ray.style.left = `${start}px`;
+    container.appendChild(ray);
+    ray.animate([
+      { transform: 'translateX(0) scaleY(0.1)', opacity: 0 },
+      { transform: `translateX(${end * 0.5}px) scaleY(1)`, opacity: 0.25 + Math.random() * 0.45, offset: 0.35 },
+      { transform: `translateX(${end}px) scaleY(1.1)`, opacity: 0 }
+    ], {
+      duration: 1100 + Math.random() * 600,
+      delay: 450 + Math.random() * 250,
+      easing: 'cubic-bezier(0.2, 0.7, 0.3, 1)',
+      fill: 'both'
+    });
+  }
+}
+
+// Polvere e piccoli capelli che fluttuano lentamente nella luce
+function startIntroDust(canvas) {
+  if (!canvas || !canvas.getContext) return () => {};
+  const ctx = canvas.getContext('2d');
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  let w = 0;
+  let h = 0;
+  const resize = () => {
+    w = canvas.clientWidth;
+    h = canvas.clientHeight;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  };
+  resize();
+
+  const bits = Array.from({ length: 46 }, () => ({
+    x: Math.random() * w,
+    y: Math.random() * h,
+    r: 0.4 + Math.random() * 1.3,
+    len: Math.random() < 0.3 ? 4 + Math.random() * 7 : 0, // alcuni sono capelli, non puntini
+    angle: Math.random() * Math.PI,
+    spin: (Math.random() - 0.5) * 0.01,
+    vx: (Math.random() - 0.5) * 0.15,
+    vy: -0.08 - Math.random() * 0.25,
+    alpha: 0.12 + Math.random() * 0.4
+  }));
+
+  let raf = 0;
+  const draw = () => {
+    ctx.clearRect(0, 0, w, h);
+    const cx = w / 2;
+    const cy = h / 2;
+    const maxD = Math.hypot(cx, cy);
+    for (const b of bits) {
+      b.x += b.vx;
+      b.y += b.vy;
+      b.angle += b.spin;
+      if (b.y < -10) { b.y = h + 10; b.x = Math.random() * w; }
+      if (b.x < -10) b.x = w + 10;
+      if (b.x > w + 10) b.x = -10;
+      // più luminosi vicino al centro, dove c'è il faro
+      const light = 1 - Math.min(Math.hypot(b.x - cx, b.y - cy) / maxD, 1) * 0.75;
+      ctx.globalAlpha = b.alpha * light;
+      ctx.strokeStyle = ctx.fillStyle = '#ffffff';
+      if (b.len) {
+        ctx.lineWidth = 0.7;
+        ctx.beginPath();
+        ctx.moveTo(b.x - Math.cos(b.angle) * b.len / 2, b.y - Math.sin(b.angle) * b.len / 2);
+        ctx.quadraticCurveTo(b.x + 2, b.y - 2, b.x + Math.cos(b.angle) * b.len / 2, b.y + Math.sin(b.angle) * b.len / 2);
+        ctx.stroke();
+      } else {
+        ctx.beginPath();
+        ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+    raf = requestAnimationFrame(draw);
+  };
+  raf = requestAnimationFrame(draw);
+  window.addEventListener('resize', resize);
+  return () => {
+    cancelAnimationFrame(raf);
+    window.removeEventListener('resize', resize);
+  };
+}
 
 function initIntroScreen() {
   const intro = document.getElementById('intro-screen');
@@ -53,12 +146,14 @@ function initIntroScreen() {
     return;
   }
 
+  const logo = document.getElementById('nf-logo');
   const glyphB = document.getElementById('nf-b');
   const glyphF = document.getElementById('nf-f');
   const timers = [];
   let exiting = false;
+  let stopDust = () => {};
 
-  // Porta B e F nella posizione del logo intero, al centro dello schermo.
+  // Mette il logo intero al centro, e B e F esattamente sopra le loro parti del logo.
   // La scritta finale resta ferma nel layout: animiamo solo le trasformazioni.
   const placeAsLogo = () => {
     glyphB.style.transform = glyphF.style.transform = 'none';
@@ -66,6 +161,10 @@ function initIntroScreen() {
     const scale = logoW / LOGO_SIZE.w;
     const logoLeft = (window.innerWidth - logoW) / 2;
     const logoTop = (window.innerHeight - LOGO_SIZE.h * scale) / 2;
+
+    logo.style.width = `${logoW}px`;
+    logo.style.left = `${logoLeft}px`;
+    logo.style.top = `${logoTop}px`;
 
     [[glyphB, LOGO_PARTS.b], [glyphF, LOGO_PARTS.f]].forEach(([el, part]) => {
       const r = el.getBoundingClientRect();
@@ -81,7 +180,10 @@ function initIntroScreen() {
     document.body.style.overflow = '';
     window.removeEventListener('resize', onResize);
     try { localStorage.setItem('feb-intro-seen', '1'); } catch (e) {}
-    setTimeout(() => intro.remove(), 600);
+    setTimeout(() => {
+      stopDust();
+      intro.remove();
+    }, 600);
   };
 
   const exit = () => {
@@ -99,11 +201,13 @@ function initIntroScreen() {
   const start = () => {
     placeAsLogo();
     window.addEventListener('resize', onResize);
+    stopDust = startIntroDust(document.getElementById('nf-dust'));
     // forza il calcolo prima di far partire le animazioni
     void intro.offsetWidth;
     intro.classList.add('nf-in');
-    timers.push(setTimeout(() => intro.classList.add('nf-split'), 1500));
-    timers.push(setTimeout(exit, 3300));
+    burstIntroRays(document.getElementById('nf-rays'));
+    timers.push(setTimeout(() => intro.classList.add('nf-split'), 1750));
+    timers.push(setTimeout(exit, 4100));
   };
 
   document.body.style.overflow = 'hidden';
@@ -113,7 +217,7 @@ function initIntroScreen() {
   });
 
   // Aspetta font e immagini, così le misure della scritta sono quelle giuste
-  const imagesReady = [glyphB, glyphF].map(img =>
+  const imagesReady = [logo, glyphB, glyphF].map(img =>
     img.complete ? Promise.resolve() : new Promise(r => { img.onload = img.onerror = r; })
   );
   Promise.all([document.fonts ? document.fonts.ready : Promise.resolve(), ...imagesReady]).then(start);

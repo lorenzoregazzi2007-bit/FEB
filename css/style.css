@@ -181,9 +181,9 @@ h1, h2, h3, h4 {
 }
 
 /* ------------------------------------------------------------
-   INTRO STILE NETFLIX: IL LOGO BF APPARE CON UN "TA-DUM",
-   LA B VA A SINISTRA, LA F A DESTRA E IN MEZZO SI COMPONE
-   LA SCRITTA "BARBER FEB", POI ZOOM DENTRO E SI APRE IL SITO
+   INTRO STILE NETFLIX: IL LOGO BF APPARE CON UN "TA-DUM" E FASCI
+   DI LUCE, LA B VA A SINISTRA, LA F A DESTRA E IN MEZZO SI COMPONE
+   "BARBER FEB"; CORNICE, POLVERE NELLA LUCE E TAGLINE ATTORNO
 ------------------------------------------------------------ */
 .intro-screen {
   position: fixed;
@@ -206,6 +206,105 @@ html.intro-skip .intro-screen {
   pointer-events: none;
 }
 
+/* Polvere/capelli che fluttuano nella luce (canvas disegnato via JS) */
+.nf-dust {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+.intro-screen.nf-in .nf-dust {
+  opacity: 1;
+}
+
+/* Faro di luce dietro al logo */
+.nf-glow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 150vmax;
+  height: 150vmax;
+  transform: translate(-50%, -50%) scale(0.4);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.13) 0%, rgba(255, 255, 255, 0.04) 22%, rgba(0, 0, 0, 0) 45%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.intro-screen.nf-in .nf-glow {
+  animation: nf-glow-in 1.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.3s forwards;
+}
+
+@keyframes nf-glow-in {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.4); }
+  45% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+  100% { opacity: 0.75; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Fasci di luce verticali stile Netflix (creati via JS) */
+.nf-rays {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  pointer-events: none;
+}
+
+.nf-ray {
+  position: absolute;
+  top: -10vh;
+  height: 120vh;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0));
+  opacity: 0;
+  filter: blur(1px);
+  mix-blend-mode: screen;
+}
+
+/* Cornice: angoli e scritte piccole sui bordi */
+.nf-corner {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border: 0 solid rgba(255, 255, 255, 0.45);
+  opacity: 0;
+  transform: scale(0.3);
+  transition: opacity 0.6s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nf-corner.tl { top: 16px; left: 16px; border-top-width: 1px; border-left-width: 1px; transform-origin: top left; }
+.nf-corner.tr { top: 16px; right: 16px; border-top-width: 1px; border-right-width: 1px; transform-origin: top right; }
+.nf-corner.bl { bottom: 16px; left: 16px; border-bottom-width: 1px; border-left-width: 1px; transform-origin: bottom left; }
+.nf-corner.br { bottom: 16px; right: 16px; border-bottom-width: 1px; border-right-width: 1px; transform-origin: bottom right; }
+
+.nf-label {
+  position: absolute;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  color: rgba(255, 255, 255, 0.5);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.8s ease 0.25s;
+}
+
+.nf-label.tl { top: 25px; left: 26px; }
+.nf-label.tr { top: 25px; right: 26px; }
+.nf-label.bl { bottom: 25px; left: 26px; }
+.nf-label.br { bottom: 25px; right: 26px; }
+
+.intro-screen.nf-in .nf-corner {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.intro-screen.nf-in .nf-label {
+  opacity: 1;
+}
+
+/* Palco centrale */
 .nf-stage {
   position: absolute;
   inset: 0;
@@ -217,7 +316,7 @@ html.intro-skip .intro-screen {
 
 /* Fase 1: "ta-dum", il logo arriva dal buio con un lampo di luce */
 .intro-screen.nf-in .nf-stage {
-  animation: nf-tadum 1.3s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  animation: nf-tadum 1.3s cubic-bezier(0.2, 0.7, 0.2, 1) 0.25s forwards;
 }
 
 @keyframes nf-tadum {
@@ -225,6 +324,20 @@ html.intro-skip .intro-screen {
   35% { opacity: 1; }
   62% { transform: scale(1.04); filter: brightness(1.9) drop-shadow(0 0 28px rgba(255, 255, 255, 0.85)); }
   100% { opacity: 1; transform: scale(1); filter: brightness(1) drop-shadow(0 0 10px rgba(255, 255, 255, 0.25)); }
+}
+
+/* Logo intero: visibile finché B e F non si separano */
+.nf-logo {
+  position: absolute;
+  height: auto;
+}
+
+.intro-screen.nf-split .nf-logo {
+  visibility: hidden;
+}
+
+.nf-center {
+  position: relative;
 }
 
 /* La scritta finale: [B]ARBER [F]EB, con B e F prese dal logo */
@@ -243,6 +356,7 @@ html.intro-skip .intro-screen {
   height: 0.72em;
   width: auto;
   transform-origin: 0 0;
+  visibility: hidden;
   will-change: transform;
 }
 
@@ -267,6 +381,7 @@ html.intro-skip .intro-screen {
 
 /* Fase 2: B e F si separano, le lettere compaiono in mezzo */
 .intro-screen.nf-split .nf-glyph {
+  visibility: visible;
   transition: transform 0.95s cubic-bezier(0.75, 0, 0.2, 1);
   transform: none !important;
 }
@@ -280,6 +395,50 @@ html.intro-skip .intro-screen {
               filter 0.6s ease 0.35s;
 }
 
+/* Riga sottile che si disegna come un colpo di rasoio, e tagline */
+.nf-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 0.32em);
+  height: 1px;
+  font-size: clamp(32px, 12.5vw, 84px);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), #ffffff 20%, #ffffff 80%, rgba(255, 255, 255, 0));
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+  transform: scaleX(0);
+}
+
+.nf-tagline {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 0.6em);
+  font-size: clamp(32px, 12.5vw, 84px);
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.nf-tagline span {
+  display: block;
+  font-size: clamp(0.56rem, 2.4vw, 0.78rem);
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  margin-right: -0.32em;
+  color: rgba(255, 255, 255, 0.6);
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.intro-screen.nf-split .nf-line {
+  transform: scaleX(1);
+  transition: transform 0.7s cubic-bezier(0.7, 0, 0.2, 1) 0.9s;
+}
+
+.intro-screen.nf-split .nf-tagline span {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s ease 1.2s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 1.2s;
+}
+
 /* Fase 3: zoom dentro la scritta, come la fine della sigla Netflix */
 .intro-screen.nf-exit .nf-stage {
   animation: nf-zoom-in 0.75s cubic-bezier(0.7, 0, 0.84, 0) forwards;
@@ -290,18 +449,26 @@ html.intro-skip .intro-screen {
   to { opacity: 0; transform: scale(7); filter: brightness(1.6) drop-shadow(0 0 30px rgba(255, 255, 255, 0.6)); }
 }
 
+.intro-screen.nf-exit .nf-corner,
+.intro-screen.nf-exit .nf-label,
+.intro-screen.nf-exit .nf-glow,
+.intro-screen.nf-exit .nf-dust {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  animation: none;
+}
+
 .intro-skip-btn {
   position: absolute;
-  right: 18px;
-  top: 18px;
+  left: 50%;
+  top: 14px;
+  transform: translateX(-50%);
   z-index: 5;
   background: rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
   border: 1px solid rgba(255, 255, 255, 0.25);
   color: rgba(255, 255, 255, 0.8);
   font-family: inherit;
-  font-size: 0.7rem;
+  font-size: 0.66rem;
   font-weight: 700;
   letter-spacing: 0.16em;
   padding: 7px 14px;
@@ -318,6 +485,7 @@ html.intro-skip .intro-screen {
 .intro-screen.nf-exit .intro-skip-btn {
   opacity: 0;
 }
+
 
 /* ------------------------------------------------------------
    SITE HEADER & NAVIGATION
