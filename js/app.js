@@ -32,100 +32,91 @@ function initMapConsent() {
 }
 
 /* ============================================================
-   1. INTRO SCREEN (Forbice che taglia e apre il sito)
+   1. INTRO STILE NETFLIX (logo BF → la B va a sinistra, la F a
+      destra e in mezzo si compone "BARBER FEB")
 ============================================================ */
+
+// Posizione di B e F dentro al logo originale (logo-white.png, 458x331)
+const LOGO_SIZE = { w: 458, h: 331 };
+const LOGO_PARTS = {
+  b: { x: 4, y: 4, w: 222 },
+  f: { x: 226, y: 5, w: 228 }
+};
+
 function initIntroScreen() {
   const intro = document.getElementById('intro-screen');
   if (!intro) return;
 
-  // Già vista (o movimento ridotto): via subito
+  // Movimento ridotto (o solo prima visita, se attivato): via subito
   if (document.documentElement.classList.contains('intro-skip')) {
     intro.remove();
     return;
   }
 
-  // La metà B è una copia della scena, tagliata sotto la diagonale
-  const scene = intro.querySelector('.intro-half-a .intro-scene');
-  const halfB = intro.querySelector('.intro-half-b');
-  if (scene && halfB) {
-    const copy = scene.cloneNode(true);
-    copy.querySelectorAll('img').forEach(img => { img.alt = ''; });
-    halfB.appendChild(copy);
-  }
+  const glyphB = document.getElementById('nf-b');
+  const glyphF = document.getElementById('nf-f');
+  const timers = [];
+  let exiting = false;
 
-  // Il colpo di lametta segue la diagonale 62% → 38% dello schermo (centro al 50%)
-  const setSlashGeometry = () => {
-    const w = window.innerWidth;
-    const rise = window.innerHeight * 0.24;
-    intro.style.setProperty('--slash-angle', `${Math.atan2(-rise, w) * 180 / Math.PI}deg`);
-    intro.style.setProperty('--slash-len', `${Math.hypot(w, rise) + 40}px`);
+  // Porta B e F nella posizione del logo intero, al centro dello schermo.
+  // La scritta finale resta ferma nel layout: animiamo solo le trasformazioni.
+  const placeAsLogo = () => {
+    glyphB.style.transform = glyphF.style.transform = 'none';
+    const logoW = Math.min(window.innerWidth * 0.62, window.innerHeight * 0.42 * LOGO_SIZE.w / LOGO_SIZE.h, 340);
+    const scale = logoW / LOGO_SIZE.w;
+    const logoLeft = (window.innerWidth - logoW) / 2;
+    const logoTop = (window.innerHeight - LOGO_SIZE.h * scale) / 2;
+
+    [[glyphB, LOGO_PARTS.b], [glyphF, LOGO_PARTS.f]].forEach(([el, part]) => {
+      const r = el.getBoundingClientRect();
+      const k = (part.w * scale) / r.width;
+      const dx = logoLeft + part.x * scale - r.left;
+      const dy = logoTop + part.y * scale - r.top;
+      el.style.transform = `translate(${dx}px, ${dy}px) scale(${k})`;
+    });
   };
-  setSlashGeometry();
-  window.addEventListener('resize', setSlashGeometry);
-
-  document.body.style.overflow = 'hidden';
-  let autoTimer = null;
-  let cutStarted = false;
 
   const finish = () => {
     intro.classList.add('hide');
     document.body.style.overflow = '';
-    window.removeEventListener('resize', setSlashGeometry);
+    window.removeEventListener('resize', onResize);
     try { localStorage.setItem('feb-intro-seen', '1'); } catch (e) {}
-    setTimeout(() => intro.remove(), 400);
+    setTimeout(() => intro.remove(), 600);
   };
 
-  // Ciuffi di capelli che cadono dalla linea del taglio
-  const dropHair = () => {
-    const w = window.innerWidth;
-    const h = window.innerHeight;
-    for (let i = 0; i < 34; i++) {
-      const x = w * (0.5 + (Math.random() - 0.5) * 0.9);
-      const y = h * (0.62 - 0.24 * (x / w));
-      const len = 10 + Math.random() * 18;
-      const bend = (Math.random() - 0.5) * 10;
-      const shade = 170 + Math.floor(Math.random() * 85);
-      const hair = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      hair.setAttribute('class', 'intro-hair');
-      hair.setAttribute('width', '14');
-      hair.setAttribute('height', String(len + 2));
-      hair.setAttribute('viewBox', `0 0 14 ${len + 2}`);
-      hair.style.left = `${x - 7}px`;
-      hair.style.top = `${y - len / 2}px`;
-      hair.innerHTML = `<path d="M7 1 Q ${7 + bend} ${len / 2} 7 ${len + 1}" stroke="rgb(${shade},${shade},${shade})" stroke-width="${1 + Math.random() * 0.8}" stroke-linecap="round" fill="none"/>`;
-      intro.appendChild(hair);
-
-      const r0 = Math.random() * 360;
-      hair.animate([
-        { transform: `translate(0, 0) rotate(${r0}deg)`, opacity: 1 },
-        { transform: `translate(${(Math.random() - 0.5) * 120}px, ${h * (0.35 + Math.random() * 0.4)}px) rotate(${r0 + (Math.random() - 0.5) * 540}deg)`, opacity: 0 }
-      ], {
-        duration: 800 + Math.random() * 500,
-        delay: 120 + (x / w) * 180,
-        easing: 'cubic-bezier(0.35, 0, 0.8, 1)',
-        fill: 'both'
-      });
-    }
+  const exit = () => {
+    if (exiting) return;
+    exiting = true;
+    timers.forEach(clearTimeout);
+    intro.classList.add('nf-exit');
+    setTimeout(finish, 650);
   };
 
-  const cut = () => {
-    if (cutStarted) return;
-    cutStarted = true;
-    clearTimeout(autoTimer);
-    intro.classList.add('cutting');
-    dropHair();
-    setTimeout(() => intro.classList.add('split'), 260);
-    setTimeout(finish, 1300);
+  const onResize = () => {
+    if (!intro.classList.contains('nf-split')) placeAsLogo();
   };
 
-  // Tocco, click, Invio o Esc: taglio immediato
-  intro.addEventListener('click', cut);
+  const start = () => {
+    placeAsLogo();
+    window.addEventListener('resize', onResize);
+    // forza il calcolo prima di far partire le animazioni
+    void intro.offsetWidth;
+    intro.classList.add('nf-in');
+    timers.push(setTimeout(() => intro.classList.add('nf-split'), 1500));
+    timers.push(setTimeout(exit, 3300));
+  };
+
+  document.body.style.overflow = 'hidden';
+  intro.addEventListener('click', exit);
   document.addEventListener('keydown', (e) => {
-    if (['Enter', 'Escape', ' '].includes(e.key)) cut();
+    if (['Enter', 'Escape', ' '].includes(e.key)) exit();
   });
 
-  // Sequenza automatica: il logo si accende (0.15–1.25s), taglio a 1.8s
-  autoTimer = setTimeout(cut, 1800);
+  // Aspetta font e immagini, così le misure della scritta sono quelle giuste
+  const imagesReady = [glyphB, glyphF].map(img =>
+    img.complete ? Promise.resolve() : new Promise(r => { img.onload = img.onerror = r; })
+  );
+  Promise.all([document.fonts ? document.fonts.ready : Promise.resolve(), ...imagesReady]).then(start);
 }
 
 /* ============================================================
