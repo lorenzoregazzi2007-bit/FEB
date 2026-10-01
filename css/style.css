@@ -572,6 +572,7 @@ html.intro-soft .intro-screen.nf-split .nf-glyph {
   font-weight: 800;
   letter-spacing: 0.12em;
   color: #ffffff;
+  white-space: nowrap;
 }
 
 .nav-menu {
@@ -603,6 +604,46 @@ html.intro-soft .intro-screen.nf-split .nf-glyph {
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+/* Telefoni: logo, nome, Prenota e menu tutti su una riga */
+@media (max-width: 420px) {
+  .brand {
+    gap: 8px;
+  }
+
+  .brand-monogram {
+    height: 26px;
+  }
+
+  .brand-name {
+    font-size: 0.98rem;
+    letter-spacing: 0.08em;
+  }
+
+  .header-actions {
+    gap: 8px;
+  }
+
+  .header-book-btn {
+    padding: 8px 12px;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+  }
+}
+
+/* Telefoni molto stretti (es. iPhone SE 1a gen.) */
+@media (max-width: 350px) {
+  .brand-name {
+    font-size: 0.86rem;
+    letter-spacing: 0.05em;
+  }
+
+  .header-book-btn {
+    padding: 7px 9px;
+    font-size: 0.64rem;
+  }
 }
 
 .mobile-toggle {
