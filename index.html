@@ -92,8 +92,12 @@
     // Intro mostrata a ogni apertura. Per mostrarla solo alla prima visita: INTRO_ONLY_FIRST_VISIT = true
     var INTRO_ONLY_FIRST_VISIT = false;
     try {
-      if ((INTRO_ONLY_FIRST_VISIT && localStorage.getItem('feb-intro-seen')) || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      if (INTRO_ONLY_FIRST_VISIT && localStorage.getItem('feb-intro-seen')) {
         document.documentElement.classList.add('intro-skip');
+      }
+      // Con "Riduci movimento" attivo l'intro parte lo stesso, in versione leggera
+      if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('intro-soft');
       }
     } catch (e) {}
   </script>
@@ -202,7 +206,7 @@
           <h1 class="chi-siamo-title">CHI SIAMO</h1>
           
           <p class="chi-siamo-lead">
-            DA BARBER FEB A MINERBIO, CI DEDICHIAMO A OFFRIRE UN'ESPERIENZA DI CORTE E CURA DELLA BARBA DI LIVELLO SUPERIORE. IL NOSTRO OBIETTIVO È VALORIZZARE LO STILE UNICO DI OGNI CLIENTE CON TECNICA, PRECISIONE E PASSIONE.
+            DA BARBER FEB A MINERBIO
           </p>
           
           <p class="chi-siamo-subtext">

@@ -199,14 +199,25 @@ function initIntroScreen() {
     if (!intro.classList.contains('nf-split')) placeAsLogo();
   };
 
+  const soft = document.documentElement.classList.contains('intro-soft');
+  let started = false;
+
   const start = () => {
-    placeAsLogo();
+    if (started) return;
+    started = true;
+    try {
+      placeAsLogo();
+    } catch (e) {
+      // se qualcosa va storto meglio aprire subito il sito che lasciare lo schermo nero
+      finish();
+      return;
+    }
     window.addEventListener('resize', onResize);
-    stopDust = startIntroDust(document.getElementById('nf-dust'));
+    if (!soft) stopDust = startIntroDust(document.getElementById('nf-dust'));
     // forza il calcolo prima di far partire le animazioni
     void intro.offsetWidth;
     intro.classList.add('nf-in');
-    burstIntroRays(document.getElementById('nf-rays'));
+    if (!soft) burstIntroRays(document.getElementById('nf-rays'));
     timers.push(setTimeout(() => intro.classList.add('nf-split'), 1750));
     timers.push(setTimeout(exit, 4100));
   };
@@ -221,7 +232,9 @@ function initIntroScreen() {
   const imagesReady = [logo, glyphB, glyphF].map(img =>
     img.complete ? Promise.resolve() : new Promise(r => { img.onload = img.onerror = r; })
   );
-  Promise.all([document.fonts ? document.fonts.ready : Promise.resolve(), ...imagesReady]).then(start);
+  Promise.all([document.fonts ? document.fonts.ready : Promise.resolve(), ...imagesReady]).then(start, start);
+  // Rete lenta o font che non arrivano: dopo 1,5 secondi parte comunque
+  setTimeout(start, 1500);
 }
 
 /* ============================================================
